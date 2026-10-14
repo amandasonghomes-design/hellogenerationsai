@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quick Reference Guide · 智启研习社</title>
+<meta name="description" content="AI 创作速查：Suno 做歌曲、AI 视频、AI Agent、Prompt 公式与负责任使用。">
+<meta name="theme-color" content="#F3F8FF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%238CC8FF'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="logo">✦</span><span data-site-name>智启研习社</span></a><nav aria-label="主导航"><a href="/">首页</a><a href="/gallery">作品展览</a><a href="/guide" aria-current="page">Quick Guide</a><a href="/startup">AI 创业</a></nav></div></header>
+
+<main>
+<div class="page-head"><div class="wrap">
+  <span class="pill">Quick Reference Guide</span>
+  <h1>AI 创作速查指南</h1>
+  <p>适合初学者的 step-by-step。Prompt 示例可以直接复制使用。</p>
+</div></div>
+<section><div class="wrap guide-layout">
+  <aside class="toc" aria-label="目录"><strong class="mono">CONTENTS</strong>
+    <a href="#intro">① 工具与关键词</a><a href="#prompt">② Prompt 公式</a><a href="#song">③ AI 歌曲 (Suno)</a><a href="#video">④ AI 视频</a><a href="#agent">⑤ AI Agent</a><a href="#twin">⑥ 数字分身</a><a href="#safe">⑦ 负责任使用</a></aside>
+  <div>
+
+  <div class="guide-sec" id="intro">
+    <div class="eyebrow">// 01</div><h2>工具与关键词</h2>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><div class="ico t-v">💬</div><h3>ChatGPT</h3><p>万能对话助手：写作、翻译、头脑风暴、学习问答。适合入门第一站。</p></div>
+      <div class="card"><div class="ico t-t">📚</div><h3>Claude</h3><p>擅长阅读与总结长文档、写作润色、逻辑整理。</p></div>
+      <div class="card"><div class="ico muse"><img src="/media/muse-icon.png" alt="Muse" width="56" height="56"></div><h3>Muse</h3><p>来自 Meta 的 AI Agent 智能助手，能帮你做很多事情：查邮件、订机票、回复信息。</p></div>
+      <div class="card"><div class="ico t-b">🧠</div><h3>四个关键词</h3><p><b>Generative AI</b> 生成式 AI · <b>LLM</b> 大语言模型 · <b>Prompt</b> 提示词 · <b>AI Agent</b> 智能助手</p></div>
+    </div>
+    <div class="tip">💡 初学者建议：先选一个工具，每天练习 10 分钟，用熟了再扩展。</div>
+  </div>
+
+  <div class="guide-sec" id="prompt">
+    <div class="eyebrow">// 02</div><h2>Prompt 公式</h2>
+    <p class="lead">把想要的结果说清楚，AI 的答案就会好很多。</p>
+    <div class="formula">
+      <div><small>ROLE</small><b>角色</b><span>你是谁</span></div>
+      <div><small>TASK</small><b>任务</b><span>要做什么</span></div>
+      <div><small>CONTEXT</small><b>背景</b><span>给谁、为何</span></div>
+      <div><small>FORMAT</small><b>格式</b><span>长度与样式</span></div>
+    </div>
+    <div class="prompt"><span class="lab">PROMPT 示例</span><p>你是一位耐心的社团活动策划，请帮我写一段 100 字的邀请文案，用于 10 月的线上公益讲座、发到微信群，语气温暖，并附 3 个标题选项。</p><button class="copy" type="button">复制</button></div>
+    <div class="tip">💡 不满意就继续追问：“再说得更简单一点”“换成英文版”“改短一点”。</div>
+  </div>
+
+  <div class="guide-sec" id="song">
+    <div class="eyebrow">// 03</div><h2>🎵 用 Suno 做 AI 歌曲</h2>
+    <p class="lead">Suno 是一个用 AI 生成歌曲的 app，五步完成。</p>
+    <figure class="video-card">
+      <div class="video-wrap"><iframe src="https://www.youtube-nocookie.com/embed/jRD8nMxjghw" title="手把手教你用 SUNO 制作歌曲" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption><b>🎬 示范视频：手把手教你用 SUNO 制作歌曲</b><span>先看一遍视频，再对照下面的五个步骤自己试试。</span><a href="https://youtu.be/jRD8nMxjghw" target="_blank" rel="noopener">在 YouTube 打开 →</a></figcaption>
+    </figure>
+    <ol class="steps">
+      <li><b>歌词</b><span class="en">LYRICS</span><p>输入或粘贴歌词。可以先用 ChatGPT / Claude 写好，再贴进来。</p></li>
+      <li><b>风格</b><span class="en">STYLE</span><p>用文字描述曲风与情绪，例如：柔和、钢琴、慢板、温暖女声。</p></li>
+      <li><b>生成</b><span class="en">CREATE</span><p>点击 Create，AI 会生成歌曲。可多生成几个版本挑选。</p></li>
+      <li><b>编辑</b><span class="en">EDIT · COVER ART</span><p>修改歌名，并设定封面（Cover Art）。</p></li>
+      <li><b>发表</b><span class="en">PUBLISH</span><p>发布并分享你的作品。</p></li>
+    </ol>
+    <div class="prompt"><span class="lab">PROMPT · 先请 AI 写歌词</span><p>请写一首中文赞美诗：2 段主歌 + 副歌，主题是“平安与盼望”。节奏温柔舒缓，歌词简单易唱，适合小组崇拜，避免生僻字。</p><button class="copy" type="button">复制</button></div>
+    <div class="tip">💡 追问示例：“把副歌改得更简短，每句不超过 8 个字”。</div>
+    <div class="tip warn">⚠️ 歌词请人工审阅；发布前留意版权与授权，并保存 Prompt 与修改版本。</div>
+  </div>
+
+  <div class="guide-sec" id="video">
+    <div class="eyebrow">// 04</div><h2>🎬 AI 视频制作</h2>
+    <p class="lead">两种做法：用 AI 助手一张图加一句话快速出片，或按五步一步步做、掌控每个细节。</p>
+
+    <div class="path-card fast" id="muse-video">
+      <span class="path-tag">⚡ 快速版 · 一张图 + 一句话</span>
+      <h3>用 AI 助手（例：Kimi）：一句话就能做视频</h3>
+      <p>不用写脚本、不用分镜、不用剪辑。给 AI 助手一张图，再用一两句话说出想法，它会自动编故事、出画面、配声音、加字幕，直接给你一支短片。</p>
+      <div class="chips"><span>① 准备一张图</span><span>② 说一两句话</span><span>③ 等它生成</span></div>
+      <figure class="video-card">
+        <div class="video-wrap"><video controls preload="metadata" playsinline poster="/media/muse-cowboy-cats-poster.jpg" src="/media/muse-cowboy-cats.mp4"></video></div>
+        <figcaption><b>🐱 示例：《喵镇正午》（30 秒 · 三幕）</b><span>只给了一张两只猫的图和一句话，AI 自己编出三幕故事，并配上音乐与字幕：「不速之客」「酒馆大闹」「决斗？MEOW！」。</span></figcaption>
+      </figure>
+      <div class="prompt"><span class="lab">示例说法 · 先上传一张图，再说</span><p>以这两只猫为原型，做一部有趣西部短片，可以骑马或者搞些事情。</p><button class="copy" type="button">复制</button></div>
+      <div class="grid g2 pc">
+        <div class="card pro"><h3>✅ 优点</h3><ul class="pl">
+          <li><b>快</b>：一句话、几分钟就有成品。</li>
+          <li><b>零门槛</b>：不会写脚本、不会剪辑也能做。</li>
+          <li><b>一站式</b>：故事、画面、声音、字幕一次完成。</li>
+          <li><b>适合试想法</b>：先看效果，再决定要不要精修。</li>
+        </ul></div>
+        <div class="card con"><h3>⚠️ 缺点</h3><ul class="pl">
+          <li><b>不好精准控制</b>：情节、角色长相、镜头由 AI 决定。</li>
+          <li><b>可能要多试几次</b>：结果有随机性，不满意就换个说法重来。</li>
+          <li><b>细节难改</b>：字幕错字、某个镜头不满意，不容易单独修改。</li>
+          <li><b>长度与功能有限</b>：不同工具、不同时间提供的功能不一样，以工具当时的说明为准。</li>
+        </ul></div>
+      </div>
+      <div class="tip">💡 图决定角色的样子，一句话决定故事。想改就接着说，例如「第二幕再搞笑一点」「结尾换成日落」。</div>
+    </div>
+
+    <h3 class="path-title">🎛 完整版：五步做视频<span>想要更多控制，就按步骤来</span></h3>
+    <ol class="steps">
+      <li><b>脚本</b><span class="en">SCRIPT</span><p>先写故事大纲，决定要讲什么、给谁看。</p></li>
+      <li><b>分镜</b><span class="en">STORYBOARD</span><p>规划每个镜头：画面、旁白、字幕。</p></li>
+      <li><b>画面</b><span class="en">VISUALS</span><p>用 AI 生成图片或视频片段（选择你喜欢的 AI 图像／视频工具）。</p></li>
+      <li><b>配音</b><span class="en">VOICEOVER</span><p>加入 AI 旁白与配乐。</p></li>
+      <li><b>剪辑</b><span class="en">EDIT</span><p>合成片段并加上字幕，导出分享。</p></li>
+    </ol>
+    <div class="prompt"><span class="lab">PROMPT · 视频脚本</span><p>请为“智启研习社 AI 公益论坛”写一个 30 秒宣传短片脚本，分成 5 个镜头，每个镜头包含画面描述、旁白和字幕。</p><button class="copy" type="button">复制</button></div>
+    <div class="tip">💡 第一个视频建议：30 秒活动宣传短片、教学微课或公益故事分享。</div>
+  </div>
+
+  <div class="guide-sec" id="agent">
+    <div class="eyebrow">// 05</div><h2>🤖 AI Agent：从聊天到做事</h2>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>聊天 AI</h3><p>一问一答，每一步由你指挥。擅长写、改、解释，像随时待命的顾问。</p></div>
+      <div class="card"><h3>AI Agent</h3><p>理解目标、自己拆解步骤，并调用工具（搜索、文件、日历）完成任务，像会主动做事的助理。</p></div>
+    </div>
+    <div class="formula" style="margin-top:14px">
+      <div><small>GOAL</small><b>目标</b></div><div><small>PLAN</small><b>规划</b></div><div><small>ACT</small><b>行动</b></div><div><small>CHECK</small><b>检查</b></div>
+    </div>
+    <div class="prompt"><span class="lab">PROMPT · 活动助理</span><p>帮我筹备下个月的线上讲座：列出筹备清单、写一段邀请文案，并整理成一周时间表。</p><button class="copy" type="button">复制</button></div>
+    <div class="tip">💡 常见用途：活动助理（报名、通知、提醒）· 研究助理（搜集、摘要）· 创作助理（歌词、脚本、文案）。</div>
+  </div>
+
+  <div class="guide-sec" id="twin">
+    <div class="eyebrow">// 06</div><h2>🪞 如何制作 Digital Twin 数字分身</h2>
+    <p class="lead">Digital Twin 有几种做法，先看你想要哪一种。</p>
+    <div class="grid g2">
+      <div class="card"><div class="ico t-r">🎥</div><h3>① 会说话的真人分身</h3>
+        <p><b>Talking Avatar · 最火的做法</b><br>上传一张照片或一段自拍视频，输入文字，就生成“你”开口说话的视频。适合口播、课程、短剧旁白。</p>
+        <p style="margin-top:12px"><b>好上手的工具</b>（都有免费试用额度）</p>
+        <div class="chips"><span>HeyGen</span><span>D-ID</span><span>Synthesia</span></div>
+        <div class="tip">💡 想更像本人：录 2–3 分钟自己对着镜头说话的视频去训练，嘴型和表情会逼真很多。</div></div>
+      <div class="card"><div class="ico t-v">💬</div><h3>② 会聊天的 AI 分身</h3>
+        <p><b>Chat Twin</b><br>把你的经历、说话风格、知识交给 AI，别人或你自己都可以随时跟“你”聊天。适合客服、留念、知识传承。</p>
+        <p style="margin-top:12px"><b>简单的做法</b></p>
+        <div class="chips"><span>ChatGPT 的 Custom GPT</span><span>character.ai</span></div>
+        <div class="tip">💡 进阶：微调一个开源模型，技术门槛较高。</div></div>
+    </div>
+  </div>
+
+  <div class="guide-sec" id="safe">
+    <div class="eyebrow">// 07</div><h2>负责任地使用 AI</h2>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>✅ 核对事实</h3><p>Fact-check：AI 可能出错，重要内容请自己再确认。</p></div>
+      <div class="card"><h3>🔒 保护隐私</h3><p>Privacy：不要输入密码、证件号码等个人敏感信息。</p></div>
+      <div class="card"><h3>©️ 尊重版权</h3><p>Copyright：确认作品与素材的使用范围。</p></div>
+      <div class="card"><h3>🏷️ 标注 AI 生成</h3><p>Disclosure：分享作品时，说明哪些部分由 AI 协助。</p></div>
+    </div>
+  </div>
+
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap"><div><strong data-site-name>智启研习社</strong> · AI 公益论坛 · © <span data-year>2026</span></div><p class="disc">免责声明：本网站为非营利公益分享，内容仅供学习与参考。对于因使用或误用本网站内容所造成的任何错误、损失或后果，智启研习社及讲者概不负责。<br>Disclaimer: This is a non-profit community site. Content is for educational purposes only; the organizers and contributors are not responsible for any misuse, errors, or losses arising from its use.</p></div></footer>
+
+<script src="/data/site.js"></script>
+<script src="/data/works.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>
