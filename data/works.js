@@ -3,6 +3,10 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
+  { title: "这一生只愿跟随你", author: "Jie Zhang（Mureka）", category: "song",
+    desc: "用 Mureka 创作的歌曲，点击下方链接收听。",
+    image: "https://static-cos.mureka.ai/cos-prod/skm/image/20261014/AYvkzxuGahK2UEBWqvUmUX.jpeg",
+    link: "https://www.mureka.ai/song-detail/Udpa1WXoDPNZTJu7DH9Q5e?is_from_share=1" },
   { title: "为自由而战的猫猫 🐱", author: "Amanda", category: "video",
     desc: "15 秒 AI 生成短片：为自由而战的小猫士兵，点击播放。",
     image: "/media/cat-soldier-poster.jpg", video: "/media/cat-soldier.mp4" },
