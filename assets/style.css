@@ -381,7 +381,7 @@ footer .wrap{gap:10px}
 .meteor::before{content:"";position:absolute;left:-2px;top:-2px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 8px 2px rgba(150,225,255,.9)}
 .comet{position:absolute;top:var(--t);left:var(--l);display:flex;align-items:center;opacity:0;transform-origin:14px 50%;
   transform:rotate(-28deg);will-change:transform,opacity;animation:comet var(--dur,28s) linear var(--delay,0s) infinite}
-.comet svg{width:36px;height:36px;flex:none;filter:drop-shadow(0 0 7px rgba(255,214,90,.95)) drop-shadow(0 0 16px rgba(255,190,80,.55))}
+.comet svg{width:18px;height:18px;flex:none;filter:drop-shadow(0 0 7px rgba(255,214,90,.95)) drop-shadow(0 0 16px rgba(255,190,80,.55))}
 .comet .tail{width:200px;height:12px;margin-left:-8px;border-radius:0 12px 12px 0;
   background:linear-gradient(90deg,rgba(255,200,235,.85),rgba(160,220,255,.45) 40%,rgba(160,220,255,0));filter:blur(2px)}
 @keyframes meteor{0%{opacity:0;transform:rotate(-28deg) translateX(0)}4%{opacity:1}46%{opacity:.95}56%,100%{opacity:0;transform:rotate(-28deg) translateX(-950px)}}

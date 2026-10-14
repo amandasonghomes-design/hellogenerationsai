@@ -111,8 +111,8 @@
     ['4%','62%','19s','3s','100px'], ['44%','72%','16s','11s','120px']
   ].map(function(m){ return '<i class="meteor" style="--t:'+m[0]+';--l:'+m[1]+';--dur:'+m[2]+';--delay:'+m[3]+';--len:'+m[4]+'"></i>'; }).join('');
   var comet = '<div class="comet" style="--t:14%;--l:92%;--dur:30s;--delay:2s"><svg viewBox="0 0 40 40" aria-hidden="true">' +
-    '<defs><radialGradient id="cg" cx="38%" cy="30%"><stop offset="0" stop-color="#FFF6B8"/><stop offset="1" stop-color="#FFC21F"/></radialGradient></defs>' +
-    '<polygon points="20.00,4.50 24.70,15.03 36.17,16.25 27.61,23.97 29.99,35.25 20.00,29.50 10.01,35.25 12.39,23.97 3.83,16.25 15.30,15.03" fill="url(#cg)" stroke="#FFC21F" stroke-width="3" stroke-linejoin="round"/>' +
+    '' +
+    '<polygon points="20.00,4.50 24.70,15.03 36.17,16.25 27.61,23.97 29.99,35.25 20.00,29.50 10.01,35.25 12.39,23.97 3.83,16.25 15.30,15.03" fill="#FFC21F" stroke="#FFC21F" stroke-width="3" stroke-linejoin="round"/>' +
     '<circle cx="16" cy="20.5" r="1.8" fill="#5A3E1B"/><circle cx="24" cy="20.5" r="1.8" fill="#5A3E1B"/>' +
     '<path d="M16.8 25 Q20 28.2 23.2 25" stroke="#5A3E1B" stroke-width="1.6" fill="none" stroke-linecap="round"/>' +
     '<circle cx="13.2" cy="24.2" r="2" fill="#FF9F7A" opacity=".55"/><circle cx="26.8" cy="24.2" r="2" fill="#FF9F7A" opacity=".55"/></svg>' +
