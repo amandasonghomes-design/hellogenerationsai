@@ -107,8 +107,8 @@
   var bands = document.querySelectorAll('.hero, .page-head');
   if (!bands.length) return;
   var meteors = [
-    ['8%','88%','18.6s','0s','140px'], ['32%','98%','24.3s','5s','110px'], ['58%','84%','21.4s','9s','90px'],
-    ['4%','62%','27.1s','3s','100px'], ['44%','72%','22.9s','11s','120px']
+    ['8%','88%','13s','0s','140px'], ['58%','84%','15s','9s','90px'],
+    ['44%','72%','16s','11s','120px']
   ].map(function(m){ return '<i class="meteor" style="--t:'+m[0]+';--l:'+m[1]+';--dur:'+m[2]+';--delay:'+m[3]+';--len:'+m[4]+'"></i>'; }).join('');
   var comet = '<div class="comet" style="--t:14%;--l:92%;--dur:30s;--delay:2s"><svg viewBox="0 0 40 40" aria-hidden="true">' +
     '' +
