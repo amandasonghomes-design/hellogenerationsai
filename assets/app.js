@@ -82,7 +82,7 @@
 (function(){
   var box = document.getElementById('visits'), num = document.getElementById('visit-n');
   if (!box || !num) return;
-  var base = 'https://abacus.jasoncameron.dev/', ns = 'zhiqi-generationsai', key = 'home-visits';
+  var base = 'https://abacus.jasoncameron.dev/', ns = 'zhiqi-hellogenerationsai', key = 'home-visits';
   var local = /^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname);
   var counted = false, flagOk = true;
   try { counted = !!localStorage.getItem('zq_counted'); } catch (e) { flagOk = false; }
