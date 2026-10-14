@@ -3,17 +3,13 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
+  { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
+    desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
+    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" },
   { title: "这一生只愿跟随你", author: "Jie Zhang（Mureka）", category: "song",
     desc: "用 Mureka 创作的歌曲，点击下方链接收听。",
     image: "https://static-cos.mureka.ai/cos-prod/skm/image/20261014/AYvkzxuGahK2UEBWqvUmUX.jpeg",
     link: "https://www.mureka.ai/song-detail/Udpa1WXoDPNZTJu7DH9Q5e?is_from_share=1" },
-  { title: "为自由而战的猫猫 🐱", author: "Amanda", category: "video",
-    desc: "15 秒 AI 生成短片：为自由而战的小猫士兵，点击播放。",
-    image: "/media/cat-soldier-poster.jpg", video: "/media/cat-soldier.mp4" },
-  { title: "西部牛仔小猫", author: "Amanda", category: "video",
-    desc: "8 秒 AI 生成短片：西部小镇里的牛仔小猫，点击播放。",
-    image: "/media/ai-cat-poster.jpg", video: "/media/ai-cat.mp4",
-    link: "/cat-prompt", linkText: "查看提示词 Prompt →" },
   { title: "天国近了", author: "Amanda（Suno: @amandasonghomes）", category: "song",
     desc: "用 Suno 创作的歌曲，点击下方链接收听。",
     image: "https://cdn2.suno.ai/5bfa8791-7eba-4886-ade4-05b08d481050.jpeg",
@@ -45,11 +41,15 @@ window.WORKS = [
   { title: "小云朵的彩虹礼物", author: "Amanda · AI 协助创作", category: "other",
     desc: "儿童故事与插画示例：一朵小小的云，帮助了山坡上的小花。点击下方阅读完整绘本。",
     image: "/media/story-cover.svg", link: "/story" },
+  { title: "为自由而战的猫猫 🐱", author: "Amanda", category: "video",
+    desc: "15 秒 AI 生成短片：为自由而战的小猫士兵，点击播放。",
+    image: "/media/cat-soldier-poster.jpg", video: "/media/cat-soldier.mp4" },
+  { title: "西部牛仔小猫", author: "Amanda", category: "video",
+    desc: "8 秒 AI 生成短片：西部小镇里的牛仔小猫，点击播放。",
+    image: "/media/ai-cat-poster.jpg", video: "/media/ai-cat.mp4",
+    link: "/cat-prompt", linkText: "查看提示词 Prompt →" },
   { title: "喵镇正午", author: "Amanda", category: "video",
     desc: "30 秒 AI 短片：只给一张图和一句话，AI 自己编出三幕西部故事。做法见 Quick Guide。",
     image: "/media/muse-cowboy-cats-poster.jpg", video: "/media/muse-cowboy-cats.mp4",
-    link: "/guide#muse-video", linkText: "查看做法 →" },
-  { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
-    desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
-    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" }
+    link: "/guide#muse-video", linkText: "查看做法 →" }
 ];
