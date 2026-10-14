@@ -396,3 +396,24 @@ footer .wrap{gap:10px}
   animation:blink var(--d,8s) ease-in-out var(--w,0s) infinite;will-change:opacity,transform}
 @keyframes blink{0%,70%,100%{opacity:.2;transform:scale(1)}82%{opacity:1;transform:scale(1.7)}92%{opacity:.35;transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){.tw{animation:none!important}}
+
+/* ================= Comic reader ================= */
+.comic-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 18px}
+.comic-stage[hidden]{display:none}
+.comic-book{background:#FBF7EC;border:1px solid var(--line);border-radius:6px 14px 14px 6px;box-shadow:0 14px 40px rgba(20,40,90,.14),inset 10px 0 16px rgba(0,0,0,.05);
+  padding:clamp(12px,3vw,28px);display:flex;align-items:center;justify-content:center;min-height:min(54vh,460px);touch-action:pan-y}
+.comic-book img{display:block;max-width:100%;width:auto;height:auto;border:1px solid #7f7869;image-rendering:auto}
+.comic-book img.turn{animation:cturn .35s ease}
+@keyframes cturn{from{opacity:.35;transform:translateX(14px)}to{opacity:1;transform:none}}
+.comic-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin:16px 0 10px;flex-wrap:wrap}
+.comic-nav button:disabled{opacity:.4;cursor:default}
+#count{min-width:130px;text-align:center;font-size:14px;color:var(--ink2)}
+#prog{display:block;width:100%;max-width:520px;height:4px;margin:0 auto 16px;accent-color:var(--sky-d,#2a6df4)}
+.comic-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;max-width:760px;margin:0 auto}
+.cthumb{padding:0;border:2px solid transparent;border-radius:6px;background:#fff;cursor:pointer;overflow:hidden;aspect-ratio:4/3}
+.cthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cthumb[aria-current="true"]{border-color:var(--sky-d,#2a6df4)}
+.comic-hint{text-align:center;color:var(--ink2);font-size:13px;margin:14px 0 0}
+.comic-whole{display:block;max-width:760px;margin:0 auto;border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 14px 40px rgba(20,40,90,.14);cursor:zoom-in;background:#fff}
+.comic-whole img{display:block;width:100%;height:auto}
+@media (prefers-reduced-motion:reduce){.comic-book img.turn{animation:none}}

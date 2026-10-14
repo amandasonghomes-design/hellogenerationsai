@@ -44,5 +44,8 @@ window.WORKS = [
   { title: "喵镇正午", author: "Amanda", category: "video",
     desc: "30 秒 AI 短片：只给一张图和一句话，AI 自己编出三幕西部故事。做法见 Quick Guide。",
     image: "/media/muse-cowboy-cats-poster.jpg", video: "/media/muse-cowboy-cats.mp4",
-    link: "/guide#muse-video", linkText: "查看做法 →" }
+    link: "/guide#muse-video", linkText: "查看做法 →" },
+  { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
+    desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
+    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" }
 ];
