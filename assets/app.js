@@ -107,8 +107,8 @@
   var bands = document.querySelectorAll('.hero, .page-head');
   if (!bands.length) return;
   var meteors = [
-    ['8%','88%','13s','0s','140px'], ['32%','98%','17s','5s','110px'], ['58%','84%','15s','9s','90px'],
-    ['4%','62%','19s','3s','100px'], ['44%','72%','16s','11s','120px']
+    ['8%','88%','18.6s','0s','140px'], ['32%','98%','24.3s','5s','110px'], ['58%','84%','21.4s','9s','90px'],
+    ['4%','62%','27.1s','3s','100px'], ['44%','72%','22.9s','11s','120px']
   ].map(function(m){ return '<i class="meteor" style="--t:'+m[0]+';--l:'+m[1]+';--dur:'+m[2]+';--delay:'+m[3]+';--len:'+m[4]+'"></i>'; }).join('');
   var comet = '<div class="comet" style="--t:14%;--l:92%;--dur:30s;--delay:2s"><svg viewBox="0 0 40 40" aria-hidden="true">' +
     '' +
@@ -130,7 +130,7 @@
   var spaces = document.querySelectorAll('.space');
   for (var s = 0; s < spaces.length; s++) {
     var html = '';
-    for (var i = 0; i < 46; i++) {
+    for (var i = 0; i < 32; i++) {
       var size = (Math.random() < .3 ? 3 : 2);
       html += '<i class="tw" style="left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;width:'+size+'px;height:'+size+'px;--d:'+(5+Math.random()*9).toFixed(1)+'s;--w:-'+(Math.random()*14).toFixed(1)+'s"></i>';
     }
