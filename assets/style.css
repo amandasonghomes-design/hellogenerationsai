@@ -389,3 +389,10 @@ footer .wrap{gap:10px}
 @keyframes twinkle{from{opacity:.35}to{opacity:1}}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(260px,120px)}}
 @media (prefers-reduced-motion:reduce){.meteor,.comet,.space::before,.stars{animation:none!important}.meteor,.comet{display:none}}
+
+/* individual stars that blink softly now and then */
+.tw-wrap{position:absolute;inset:0;pointer-events:none}
+.tw{position:absolute;border-radius:50%;background:#fff;opacity:.2;box-shadow:0 0 6px 1px rgba(190,230,255,.9);
+  animation:blink var(--d,8s) ease-in-out var(--w,0s) infinite;will-change:opacity,transform}
+@keyframes blink{0%,70%,100%{opacity:.2;transform:scale(1)}82%{opacity:1;transform:scale(1.7)}92%{opacity:.35;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.tw{animation:none!important}}

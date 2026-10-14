@@ -124,3 +124,17 @@
     bands[i].insertBefore(d, bands[i].firstChild);
   }
 })();
+
+/* occasional soft blinking of individual stars (decorative) */
+(function(){
+  var spaces = document.querySelectorAll('.space');
+  for (var s = 0; s < spaces.length; s++) {
+    var html = '';
+    for (var i = 0; i < 46; i++) {
+      var size = (Math.random() < .3 ? 3 : 2);
+      html += '<i class="tw" style="left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;width:'+size+'px;height:'+size+'px;--d:'+(5+Math.random()*9).toFixed(1)+'s;--w:-'+(Math.random()*14).toFixed(1)+'s"></i>';
+    }
+    var wrap = document.createElement('div'); wrap.className = 'tw-wrap'; wrap.innerHTML = html;
+    spaces[s].appendChild(wrap);
+  }
+})();
