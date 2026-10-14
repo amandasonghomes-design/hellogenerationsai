@@ -101,3 +101,26 @@
     })
     .catch(function(){ clearTimeout(timer); });
 })();
+
+/* sci-fi space band: stars, meteors and a little comet (decorative) */
+(function(){
+  var bands = document.querySelectorAll('.hero, .page-head');
+  if (!bands.length) return;
+  var meteors = [
+    ['8%','88%','13s','0s','140px'], ['32%','98%','17s','5s','110px'], ['58%','84%','15s','9s','90px'],
+    ['4%','62%','19s','3s','100px'], ['44%','72%','16s','11s','120px']
+  ].map(function(m){ return '<i class="meteor" style="--t:'+m[0]+';--l:'+m[1]+';--dur:'+m[2]+';--delay:'+m[3]+';--len:'+m[4]+'"></i>'; }).join('');
+  var comet = '<div class="comet" style="--t:14%;--l:92%;--dur:30s;--delay:2s"><svg viewBox="0 0 40 40" aria-hidden="true">' +
+    '<circle cx="20" cy="20" r="14" fill="#FFF3FA"/><circle cx="20" cy="20" r="14" fill="url(#cg)"/>' +
+    '<defs><radialGradient id="cg" cx="35%" cy="30%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#FFC9E6"/></radialGradient></defs>' +
+    '<circle cx="14.5" cy="19" r="2" fill="#4A3F7A"/><circle cx="25.5" cy="19" r="2" fill="#4A3F7A"/>' +
+    '<path d="M16 25 Q20 29 24 25" stroke="#4A3F7A" stroke-width="1.8" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="11" cy="24" r="2.4" fill="#FF9FC4" opacity=".6"/><circle cx="29" cy="24" r="2.4" fill="#FF9FC4" opacity=".6"/></svg>' +
+    '<span class="tail"></span></div>';
+  for (var i = 0; i < bands.length; i++) {
+    var d = document.createElement('div');
+    d.className = 'space'; d.setAttribute('aria-hidden', 'true');
+    d.innerHTML = '<i class="stars s1"></i><i class="stars s2"></i>' + meteors + comet;
+    bands[i].insertBefore(d, bands[i].firstChild);
+  }
+})();
