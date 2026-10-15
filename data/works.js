@@ -3,9 +3,9 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
-  { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
-    desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
-    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" },
+  { title: "耶稣爱孩子们｜圣经故事", author: "王海萍 | 每日灵修（YouTube）", category: "video",
+    desc: "一个适合孩子的圣经故事视频，点击上方画面直接播放。",
+    youtube: "6m3XKYcaRhU", link: "https://youtu.be/6m3XKYcaRhU", linkText: "在 YouTube 打开 →" },
   { title: "这一生只愿跟随你", author: "Jie Zhang（Mureka）", category: "song",
     desc: "用 Mureka 创作的歌曲，点击下方链接收听。",
     image: "https://static-cos.mureka.ai/cos-prod/skm/image/20261014/AYvkzxuGahK2UEBWqvUmUX.jpeg",
@@ -51,5 +51,8 @@ window.WORKS = [
   { title: "喵镇正午", author: "Amanda", category: "video",
     desc: "30 秒 AI 短片：只给一张图和一句话，AI 自己编出三幕西部故事。做法见 Quick Guide。",
     image: "/media/muse-cowboy-cats-poster.jpg", video: "/media/muse-cowboy-cats.mp4",
-    link: "/guide#muse-video", linkText: "查看做法 →" }
+    link: "/guide#muse-video", linkText: "查看做法 →" },
+  { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
+    desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
+    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" }
 ];

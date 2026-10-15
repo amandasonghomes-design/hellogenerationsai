@@ -48,7 +48,10 @@
         var cat = labels[w.category] ? w.category : 'other';
         var img = safeUrl(w.image);
         var vid = safeUrl(w.video);
-        var visual = vid
+        var yt = /^[\w-]{11}$/.test(w.youtube || '') ? w.youtube : '';
+        var visual = yt
+          ? '<iframe src="https://www.youtube-nocookie.com/embed/' + yt + '" title="' + esc(w.title) + '" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+          : vid
           ? '<video controls preload="metadata" playsinline' + (img ? ' poster="' + esc(img) + '"' : '') + ' src="' + esc(vid) + '"></video>'
           : (img ? '<img src="' + esc(img) + '" alt="' + esc(w.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '');
         var thumb = '<div class="thumb ' + cat + '"><span aria-hidden="true">' + icons[cat] + '</span>' + visual +
