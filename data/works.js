@@ -3,10 +3,10 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
-  { title: "圣经语音灵修和双主持人对话", author: "每日灵修（YouTube）", category: "video",
+  { title: "圣经语音灵修和双主持人对话", author: "王海萍每日灵修", category: "video",
     desc: "圣经语音灵修，由两位主持人对话带领，点击上方画面直接播放。",
     youtube: "aX1R3EoE5Jk", link: "https://youtu.be/aX1R3EoE5Jk", linkText: "在 YouTube 打开 →" },
-  { title: "耶稣爱孩子们｜圣经故事", author: "王海萍 | 每日灵修（YouTube）", category: "video",
+  { title: "耶稣爱孩子们｜圣经故事", author: "王海萍每日灵修", category: "video",
     desc: "一个适合孩子的圣经故事视频，点击上方画面直接播放。",
     youtube: "6m3XKYcaRhU", link: "https://youtu.be/6m3XKYcaRhU", linkText: "在 YouTube 打开 →" },
   { title: "这一生只愿跟随你", author: "Jie Zhang（Mureka）", category: "song",
