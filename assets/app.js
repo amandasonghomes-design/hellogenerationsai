@@ -1,7 +1,7 @@
 (function(){
   var S = window.SITE || {};
   // 站点名称
-  document.querySelectorAll('[data-site-name]').forEach(function(el){ el.textContent = S.name || '智启研习社'; });
+  document.querySelectorAll('[data-site-name]').forEach(function(el){ el.textContent = S.name || '智启未来研习社'; });
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
 
   // 一键复制 Prompt（兼容手机内置浏览器：先 execCommand，再 Clipboard API，最后选取文字让用户长按复制）
