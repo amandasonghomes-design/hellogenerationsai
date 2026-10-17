@@ -6,9 +6,6 @@ window.WORKS = [
   { title: "精选演示视频", author: "智启未来研习社", category: "video",
     desc: "精选演示，点击上方画面直接播放。",
     youtube: "i8JeaxfdsH4", link: "https://youtu.be/i8JeaxfdsH4", linkText: "在 YouTube 打开 →" },
-  { title: "让微光，启发创作", author: "Amanda · AI 协助创作", category: "other",
-    desc: "矢量动画：暖光房间里，金色小点组成的圆球散开，再聚成“启”字。点击观看，有播放、重播和全屏。",
-    image: "/media/glow-cover.jpg", link: "/glow", linkText: "观看动画 →" },
   { title: "圣经语音灵修和双主持人对话", author: "王海萍每日灵修", category: "video",
     desc: "圣经语音灵修，由两位主持人对话带领，点击上方画面直接播放。",
     youtube: "aX1R3EoE5Jk", link: "https://youtu.be/aX1R3EoE5Jk", linkText: "在 YouTube 打开 →" },
@@ -66,5 +63,8 @@ window.WORKS = [
     link: "/guide#muse-video", linkText: "查看做法 →" },
   { title: "The Secret Recipe（秘密食谱）", author: "手绘漫画 · 19 格", category: "other",
     desc: "一本手绘彩铅风的小漫画：阁楼木箱里的家传食谱，被乌鸦送去远方。点击下方逐格翻页阅读。",
-    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" }
+    image: "/media/comic/cover.webp", link: "/comic", linkText: "翻开漫画 →" },
+  { title: "让微光，启发创作", author: "Amanda · AI 协助创作", category: "other",
+    desc: "矢量动画：暖光房间里，金色小点组成的圆球散开，再聚成“启”字。点击观看，有播放、重播和全屏。",
+    image: "/media/glow-cover.jpg", link: "/glow", linkText: "观看动画 →" }
 ];
