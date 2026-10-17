@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070605"><style>html,body{margin:0}</style>
+<title>让微光，启发创作 · 智启未来研习社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&text=%E5%90%AF%E8%AE%A9%E5%BE%AE%E5%85%89%EF%BC%8C%E5%8F%91%E5%88%9B%E4%BD%9C%E3%80%82&display=swap">
+<style>
+/* Layout: one dark, near-square-to-16:9 stage (SVG room + canvas particles) with a slim control bar under it. Single dark look by choice. */
+:root{
+  --bg:#070605;
+  --panel:#100d09;
+  --gold:#E8B96A;
+  --gold-hi:#FFE2A8;
+  --ink:#F1E6CF;
+  --dim:#8F7F63;
+  --line:rgba(232,185,106,.22);
+  --display:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --ui:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.back{font-size:12px;color:var(--gold);text-decoration:none;letter-spacing:.04em}
+.back:hover{color:var(--gold-hi)}
+.top h1{margin:0;font:600 15px/1.4 var(--display);letter-spacing:.04em;color:var(--ink)}
+.top span{font-size:12px;color:var(--dim);letter-spacing:.06em}
+.stage{position:relative;aspect-ratio:16/9;max-width:100%;border:1px solid var(--line);background:#0a0806;overflow:hidden}
+.stage svg,.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cap{position:absolute;left:8%;bottom:9%;font:600 clamp(18px,4.6vw,50px)/1.2 var(--display);letter-spacing:.06em;color:var(--ink);text-shadow:0 2px 24px rgba(0,0,0,.7);white-space:nowrap;pointer-events:none}
+.cap .g{color:var(--gold-hi);text-shadow:0 0 18px rgba(255,200,110,.45)}
+.cap i{font-style:normal;opacity:0}
+.bar{display:flex;align-items:center;gap:10px}
+.bar button{font:600 12px var(--ui);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:8px 12px;cursor:pointer;flex:none}
+.bar button:hover{border-color:var(--gold)}
+.bar button:focus-visible,.bar input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.bar input{flex:1;min-width:0;accent-color:var(--gold)}
+.bar output{font:12px var(--ui);color:var(--dim);font-variant-numeric:tabular-nums;flex:none;min-width:84px;text-align:right}
+@media (max-width:520px){.bar{flex-wrap:wrap}.bar input{order:5;flex-basis:100%}.bar output{margin-left:auto}}
+</style>
+
+<div class="wrap">
+  <div class="top"><a class="back" href="/gallery">← 回到作品展览</a><h1>让微光，启发创作。</h1><span>12 秒 · 暖金 · 聚光成字</span></div>
+  <div class="stage" id="stage">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="昏暗的房间：窗口透进一束暖光，矮桌上的花瓶里插着一支玫瑰，右上方悬着一颗由金色小点组成的圆球">
+      <defs>
+        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0a08"/><stop offset="1" stop-color="#15110c"/></linearGradient>
+        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a150e"/><stop offset="1" stop-color="#0a0806"/></linearGradient>
+        <linearGradient id="pane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE7B4"/><stop offset="1" stop-color="#C99650"/></linearGradient>
+        <linearGradient id="beam" x1="0.35" y1="0" x2="0.55" y2="1"><stop offset="0" stop-color="#FFD891" stop-opacity=".42"/><stop offset=".7" stop-color="#FFD891" stop-opacity=".09"/><stop offset="1" stop-color="#FFD891" stop-opacity=".02"/></linearGradient>
+        <radialGradient id="spill" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFCB7A" stop-opacity=".45"/><stop offset="1" stop-color="#FFCB7A" stop-opacity="0"/></radialGradient>
+        <radialGradient id="patch" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F6C77A" stop-opacity=".30"/><stop offset="1" stop-color="#F6C77A" stop-opacity="0"/></radialGradient>
+        <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".72"/></radialGradient>
+        <radialGradient id="dot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE9B8"/><stop offset=".3" stop-color="#F3C36F" stop-opacity=".8"/><stop offset="1" stop-color="#F3C36F" stop-opacity="0"/></radialGradient>
+        <radialGradient id="rose" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#E5675B"/><stop offset="1" stop-color="#8E2623"/></radialGradient>
+        <filter id="blur30" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="22"/></filter>
+        <filter id="blur6"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <rect width="1600" height="900" fill="url(#wall)"/>
+      <polygon points="0,660 1600,660 1600,900 0,900" fill="url(#floor)"/>
+      <rect y="654" width="1600" height="6" fill="#241c12"/>
+      <!-- window light -->
+      <ellipse cx="630" cy="280" rx="330" ry="260" fill="url(#spill)"/>
+      <polygon points="500,400 760,400 1130,900 300,900" fill="url(#beam)" filter="url(#blur6)"/>
+      <ellipse cx="760" cy="790" rx="360" ry="70" fill="url(#patch)"/>
+      <!-- window -->
+      <rect x="494" y="150" width="272" height="256" fill="#241b10"/>
+      <rect x="506" y="162" width="248" height="232" fill="url(#pane)"/>
+      <rect x="626" y="162" width="8" height="232" fill="#2d2214"/>
+      <rect x="506" y="272" width="248" height="8" fill="#2d2214"/>
+      <rect x="506" y="162" width="248" height="232" fill="#fff4d6" opacity=".18"/>
+      <rect x="486" y="404" width="288" height="12" fill="#1c150c"/>
+      <!-- wall frame -->
+      <rect x="898" y="196" width="118" height="96" fill="#2a2218" stroke="#4a3c28" stroke-width="3"/>
+      <rect x="908" y="206" width="98" height="76" fill="#0a0806"/>
+      <circle cx="957" cy="244" r="16" fill="url(#dot)"/>
+      <!-- table -->
+      <rect x="600" y="648" width="380" height="18" fill="#3b2d1d"/>
+      <rect x="600" y="648" width="380" height="3" fill="#B98A4C" opacity=".75"/>
+      <rect x="626" y="666" width="16" height="104" fill="#2a1f14"/>
+      <rect x="940" y="666" width="16" height="104" fill="#2a1f14"/>
+      <rect x="620" y="770" width="40" height="6" fill="#0a0806" opacity=".6"/>
+      <rect x="926" y="770" width="40" height="6" fill="#0a0806" opacity=".6"/>
+      <!-- vase + rose -->
+      <path d="M752 648 C732 628 736 598 758 586 L758 572 L784 572 L784 586 C806 598 810 628 790 648 Z" fill="#17120d"/>
+      <path d="M744 626 C742 608 750 596 760 590" stroke="#B98A4C" stroke-width="2.5" fill="none" opacity=".7" stroke-linecap="round"/>
+      <path d="M771 574 C772 540 790 510 826 482" stroke="#3E5A2B" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M786 538 C804 540 816 530 820 516 C804 514 792 522 786 538 Z" fill="#35502A"/>
+      <circle cx="832" cy="474" r="22" fill="url(#rose)"/>
+      <path d="M818 470 C824 456 842 458 846 472 C840 482 826 484 818 470 Z" fill="#B6382F"/>
+      <path d="M824 474 C828 466 838 466 840 474" stroke="#6D1B1A" stroke-width="2" fill="none"/>
+      <ellipse cx="836" cy="718" rx="9" ry="3.6" fill="#B6382F" opacity=".8"/>
+      <ellipse cx="684" cy="742" rx="7" ry="3" fill="#8E2623" opacity=".7"/>
+      <ellipse cx="870" cy="760" rx="6" ry="2.6" fill="#B6382F" opacity=".6"/>
+      <rect width="1600" height="900" fill="url(#vig)"/>
+    </svg>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="cap" id="cap" aria-live="off"></div>
+  </div>
+  <div class="bar">
+    <button id="play" type="button">暂停</button>
+    <button id="replay" type="button">重播</button>
+    <input id="seek" type="range" min="0" max="14" step="0.01" value="0" aria-label="播放进度">
+    <output id="time">0.0 / 12.0 秒</output>
+    <button id="full" type="button">全屏</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DUR = 12, CYCLE = 14, VW = 1600, VH = 900;
+  var stage = document.getElementById('stage'), cv = document.getElementById('fx'), ctx = cv.getContext('2d');
+  var capEl = document.getElementById('cap'), seek = document.getElementById('seek'), timeEl = document.getElementById('time');
+  var playBtn = document.getElementById('play'), replayBtn = document.getElementById('replay'), fullBtn = document.getElementById('full');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* caption: one span per character so the line can appear letter by letter */
+  var TEXT = '让微光，启发创作。', GOLD = {2:1, 3:1};
+  capEl.innerHTML = TEXT.split('').map(function(ch, i){ return '<i' + (GOLD[i] ? ' class="g"' : '') + '>' + ch + '</i>'; }).join('');
+  var chars = capEl.querySelectorAll('i');
+
+  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function clamp(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function ease(x){ x = clamp(x); return x * x * (3 - 2 * x); }
+  function easeOut(x){ x = clamp(x); return 1 - Math.pow(1 - x, 3); }
+
+  /* layout in the 1600x900 scene */
+  var MOON = {x: 1285, y: 250, r: 140}, GLYPH = {x: 1350, y: 520, size: 350};
+  var N = 3200, P = [];
+
+  function sampleGlyph(){
+    var S = 360, c = document.createElement('canvas'); c.width = c.height = S;
+    var g = c.getContext('2d');
+    g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '900 ' + Math.round(S * 0.86) + 'px "Noto Serif SC","Songti SC","STSong","SimSun",serif';
+    g.fillText('启', S / 2, S / 2 + 8);
+    var d = g.getImageData(0, 0, S, S).data, pts = [], step = 3;
+    for (var y = 0; y < S; y += step) for (var x = 0; x < S; x += step) if (d[(y * S + x) * 4 + 3] > 140) pts.push([(x / S - .5) * GLYPH.size + GLYPH.x, (y / S - .5) * GLYPH.size + GLYPH.y]);
+    return pts;
+  }
+
+  function build(){
+    var r = rng(20261015), glyph = sampleGlyph(), order = [], i;
+    for (i = 0; i < glyph.length; i++) order.push(i);
+    for (i = order.length - 1; i > 0; i--){ var j = Math.floor(r() * (i + 1)), t = order[i]; order[i] = order[j]; order[j] = t; }
+    P = [];
+    for (i = 0; i < N; i++){
+      var u = r() * 2 - 1, th = r() * Math.PI * 2, s = Math.sqrt(1 - u * u);
+      var p = {
+        x0: s * Math.cos(th), y0: u, z0: s * Math.sin(th),
+        a: r() * Math.PI * 2, d: 70 + r() * 300, sz: 1.2 + r() * 1.3, delay: r() * 1.3, ph: r() * 6.28,
+        appear: 1.2 + r() * 1.8, hasG: i < glyph.length, gx: 0, gy: 0, sw: (r() - .5) * 2
+      };
+      if (p.hasG){ var q = glyph[order[i]]; p.gx = q[0]; p.gy = q[1]; }
+      P.push(p);
+    }
+  }
+
+  /* dust drifting through the beam (runs on wall-clock time, always) */
+  var dust = (function(){ var r = rng(77), a = []; for (var i = 0; i < 110; i++) a.push({u: r(), v: r(), sp: .01 + r() * .03, sz: .6 + r() * 1.2, ph: r() * 6.28, sw: r() * 40}); return a; })();
+  function beamPoint(u, v){
+    var top = 400, bot = 880, y = top + (bot - top) * v;
+    var xl = 500 + (300 - 500) * v, xr = 760 + (1130 - 760) * v;
+    return [xl + (xr - xl) * u, y];
+  }
+
+  var W = 0, H = 0, k = 1, dpr = 1;
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = stage.clientWidth; H = stage.clientHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    /* scene uses "slice", so scale to cover and center */
+    k = Math.max(W / VW, H / VH) * dpr;
+  }
+
+  var t = 2.5, playing = !reduce, last = 0, wall = 0;
+  if (reduce) t = 12;
+
+  function draw(){
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    var ox = (cv.width - VW * k) / 2, oy = (cv.height - VH * k) / 2;
+    ctx.setTransform(k, 0, 0, k, ox, oy);
+    ctx.globalCompositeOperation = 'lighter';
+
+    var fadeAll = 1 - ease((t - 13) / 1);            /* gentle fade before the loop restarts */
+    var sc = ease((t - 5.2) / 2.3);                    /* scatter */
+    var rot = Math.min(t, 5.4) * .38;
+    var cr = Math.cos(rot), sr = Math.sin(rot);
+    var Lx = -.5, Ly = -.55, Lz = .67;
+
+    for (var i = 0; i < P.length; i++){
+      var p = P[i], x, y, a, size = p.sz;
+      var born = ease((t - p.appear) / 1.4);
+      if (born <= 0) continue;
+      var nx = p.x0 * cr + p.z0 * sr, nz = -p.x0 * sr + p.z0 * cr, ny = p.y0;
+      var lit = Math.max(0, nx * Lx + ny * Ly + nz * Lz);
+      var bright = .22 + .95 * lit; if (nz < 0) bright *= .35;
+      x = MOON.x + MOON.r * nx; y = MOON.y + MOON.r * ny;
+      a = bright * born;
+
+      if (sc > 0){
+        var far = p.hasG ? 1 : 1.7;
+        var wob = Math.sin(t * 1.3 + p.ph) * 14 * sc;
+        x += Math.cos(p.a) * p.d * far * sc + wob - 120 * sc;
+        y += Math.sin(p.a) * p.d * far * sc * .8 + 60 * sc + Math.cos(t * 1.1 + p.ph) * 10 * sc;
+        a = Math.max(a, .35 * born) * (1 - .15 * sc);
+        if (p.hasG){
+          var e = ease((t - 6.7 - p.delay) / 2.4);
+          if (e > 0){
+            var sx = x, sy = y;
+            var swirl = Math.sin(Math.PI * e) * 70 * p.sw;
+            x = sx + (p.gx - sx) * e + swirl;
+            y = sy + (p.gy - sy) * e - swirl * .5;
+            var shim = e > .98 ? 1 : 0;
+            x += shim * Math.sin(t * 2.2 + p.ph) * 1.1; y += shim * Math.cos(t * 1.9 + p.ph) * 1.1;
+            a = (.5 + .5 * e) * (.78 + .22 * Math.sin(t * 2.6 + p.ph * 3));
+            size = p.sz * (.9 + .5 * e);
+          }
+        } else {
+          a *= 1 - ease((t - 7.4 - p.delay) / 2.2);
+        }
+      }
+      a *= fadeAll;
+      if (a <= .01) continue;
+      ctx.fillStyle = 'rgba(' + (255) + ',' + (205 + Math.round(bright * 40)) + ',' + (120 + Math.round(bright * 70)) + ',' + Math.min(1, a).toFixed(3) + ')';
+      ctx.fillRect(x - size / 2, y - size / 2, size, size);
+    }
+
+    /* faint halo behind the moon while it is whole */
+    var halo = ease((t - 1.5) / 2) * (1 - sc) * fadeAll;
+    if (halo > .01){
+      var gr = ctx.createRadialGradient(MOON.x - 20, MOON.y - 20, 10, MOON.x, MOON.y, MOON.r * 1.9);
+      gr.addColorStop(0, 'rgba(255,205,120,' + (.16 * halo).toFixed(3) + ')'); gr.addColorStop(1, 'rgba(255,205,120,0)');
+      ctx.fillStyle = gr; ctx.fillRect(MOON.x - 260, MOON.y - 260, 520, 520);
+    }
+
+    /* dust in the beam */
+    var tw = wall;
+    for (var m = 0; m < dust.length; m++){
+      var d = dust[m], v = (d.v - tw * d.sp) % 1; if (v < 0) v += 1;
+      var bp = beamPoint(d.u, v), al = Math.sin(v * Math.PI) * (.35 + .35 * Math.sin(tw * 1.4 + d.ph)) * ease((t + 1) / 2) * fadeAll;
+      if (al <= .02) continue;
+      ctx.fillStyle = 'rgba(255,214,140,' + al.toFixed(3) + ')';
+      var dxx = bp[0] + Math.sin(tw * .4 + d.ph) * d.sw * .3;
+      ctx.fillRect(dxx, bp[1], d.sz, d.sz);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+
+    /* caption */
+    for (var c = 0; c < chars.length; c++){
+      chars[c].style.opacity = (ease((t - 9.3 - c * .14) / .7) * fadeAll).toFixed(3);
+    }
+    seek.value = t.toFixed(2);
+    timeEl.textContent = Math.min(t, DUR).toFixed(1) + ' / ' + DUR.toFixed(1) + ' 秒';
+  }
+
+  function frame(now){
+    var dt = Math.min(.05, (now - last) / 1000 || 0); last = now; wall += dt;
+    if (playing){ t += dt; if (t >= CYCLE) t = 0; }
+    draw();
+    requestAnimationFrame(frame);
+  }
+
+  playBtn.addEventListener('click', function(){ playing = !playing; playBtn.textContent = playing ? '暂停' : '播放'; });
+  replayBtn.addEventListener('click', function(){ t = 0; playing = true; playBtn.textContent = '暂停'; });
+  seek.addEventListener('input', function(){ t = parseFloat(seek.value) || 0; draw(); });
+  fullBtn.addEventListener('click', function(){
+    try { var p = stage.requestFullscreen ? stage.requestFullscreen() : null; if (p && p.catch) p.catch(function(){}); } catch (e) {}
+  });
+  window.addEventListener('resize', function(){ resize(); draw(); });
+  if (reduce) playBtn.textContent = '播放';
+
+  function start(){ build(); resize(); requestAnimationFrame(frame); }
+  var ready = (document.fonts && document.fonts.load) ? Promise.race([document.fonts.load('900 100px "Noto Serif SC"', '启'), new Promise(function(r){ setTimeout(r, 2500); })]) : Promise.resolve();
+  ready.then(start, start);
+})();
+</script>
+
+</html>
