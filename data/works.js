@@ -3,8 +3,8 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
-  { title: "精选演示视频", author: "智启未来研习社", category: "video",
-    desc: "精选演示，点击上方画面直接播放。",
+  { title: "零基础也能学会：怎样用 AI 制作视频？", author: "王海萍", category: "video",
+    desc: "从零开始、免费工具、实操教程，点击上方画面直接播放。",
     youtube: "i8JeaxfdsH4", link: "https://youtu.be/i8JeaxfdsH4", linkText: "在 YouTube 打开 →" },
   { title: "圣经语音灵修和双主持人对话", author: "王海萍每日灵修", category: "video",
     desc: "圣经语音灵修，由两位主持人对话带领，点击上方画面直接播放。",
