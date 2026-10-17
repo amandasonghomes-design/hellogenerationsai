@@ -3,6 +3,9 @@
 // 可选字段：image(封面图片路径或网址)、audio(音频文件)、video(视频文件)、link(外部链接)
 // sample: true 表示这是示例占位，换成真实作品后请删除这一行或改为 false。
 window.WORKS = [
+  { title: "精选演示视频", author: "智启未来研习社", category: "video",
+    desc: "精选演示，点击上方画面直接播放。",
+    youtube: "i8JeaxfdsH4", link: "https://youtu.be/i8JeaxfdsH4", linkText: "在 YouTube 打开 →" },
   { title: "让微光，启发创作", author: "Amanda · AI 协助创作", category: "other",
     desc: "矢量动画：暖光房间里，金色小点组成的圆球散开，再聚成“启”字。点击观看，有播放、重播和全屏。",
     image: "/media/glow-cover.jpg", link: "/glow", linkText: "观看动画 →" },
