@@ -73,10 +73,12 @@
       var songs = list.filter(function(w){ return w.category === 'song'; });
       var cards = list.filter(function(w){ return w.category !== 'song'; });
       if (!list.length) { box.hidden = false; box.className = ''; box.innerHTML = '<div class="empty">这个分类还没有作品，欢迎投稿！</div>'; if (songsBox) songsBox.innerHTML = ''; return; }
-      box.className = 'grid g3'; box.hidden = !cards.length;
-      box.innerHTML = cards.map(cardHtml).join('');
-      if (songsBox) songsBox.innerHTML = songs.length
-        ? '<h2 class="song-head">🎵 歌曲 <span>' + songs.length + ' 首</span></h2><div class="song-list">' + songs.map(songRow).join('') + '</div>' : '';
+      box.className = 'grid g3'; box.hidden = false;
+      var parts = cards.map(cardHtml);
+      if (songs.length) parts.splice(Math.min(4, parts.length), 0,
+        '<section class="song-block"><h2 class="song-head">🎵 歌曲 <span>' + songs.length + ' 首</span></h2><div class="song-list">' + songs.map(songRow).join('') + '</div></section>');
+      box.innerHTML = parts.join('');
+      if (songsBox) songsBox.innerHTML = '';
     }
     document.querySelectorAll('.chip').forEach(function(chip){
       chip.addEventListener('click', function(){

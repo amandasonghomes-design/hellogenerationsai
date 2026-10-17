@@ -9,7 +9,7 @@ window.WORKS = [
   { title: "圣经语音灵修和双主持人对话", author: "王海萍每日灵修", category: "video",
     desc: "圣经语音灵修，由两位主持人对话带领，点击上方画面直接播放。",
     youtube: "aX1R3EoE5Jk", link: "https://youtu.be/aX1R3EoE5Jk", linkText: "在 YouTube 打开 →" },
-  { title: "精选短视频", author: "智启未来研习社", category: "video",
+  { title: "精选短视频", author: "王海萍", category: "video",
     desc: "YouTube 短视频，点击上方画面直接播放。",
     youtube: "rp4ftHUg5jE", link: "https://youtube.com/shorts/rp4ftHUg5jE", linkText: "在 YouTube 打开 →" },
   { title: "耶稣爱孩子们｜圣经故事", author: "王海萍每日灵修", category: "video",

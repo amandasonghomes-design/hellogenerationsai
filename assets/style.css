@@ -434,3 +434,6 @@ a.song-row:hover{border-color:var(--sky-d,#2a6df4);box-shadow:var(--glow)}
 .song-text b{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0}
 .song-text i{font-style:normal;font-size:13px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;flex:0 100 auto;min-width:0}
 .song-go{flex:none;color:var(--ink2);font-size:14px}
+
+.song-block{grid-column:1/-1}
+.song-block .song-head{margin:6px 0 12px}
