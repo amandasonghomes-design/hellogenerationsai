@@ -15,6 +15,13 @@ window.WORKS = [
   { title: "耶稣爱孩子们｜圣经故事", author: "王海萍每日灵修", category: "video",
     desc: "一个适合孩子的圣经故事视频，点击上方画面直接播放。",
     youtube: "6m3XKYcaRhU", link: "https://youtu.be/6m3XKYcaRhU", linkText: "在 YouTube 打开 →" },
+  {
+    title: "手把手教你用 SUNO 制作歌曲",
+    author: "Amanda Song",
+    category: "video",
+    desc: "跟着视频一步步用 Suno 做出自己的 AI 歌曲。",
+    youtube: "jRD8nMxjghw"
+  },
   { title: "诗篇 23 篇", author: "Susanna", category: "video",
     desc: "以风景画面配诗篇 23 篇经文字幕的短片，点击播放。",
     image: "/media/psalm23-poster.jpg", video: "/media/psalm23.mp4" },
