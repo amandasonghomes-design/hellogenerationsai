@@ -70,7 +70,7 @@
     }
     function render(){
       var only = document.body.getAttribute('data-only');
-      var list = window.WORKS.filter(function(w){ if (only) return w.category === only || w.also === only; return current === 'all' || w.category === current; });
+      var list = window.WORKS.filter(function(w){ if (only) return only === 'song' ? (w.category === 'song' || w.also === 'song') : (w.category === only && w.also !== 'song'); return current === 'all' || w.category === current; });
       var songs = list.filter(function(w){ return w.category === 'song'; });
       var cards = list.filter(function(w){ return w.category !== 'song'; });
       if (!list.length) { box.hidden = false; box.className = ''; box.innerHTML = '<div class="empty">这个分类还没有作品，欢迎投稿！</div>'; if (songsBox) songsBox.innerHTML = ''; return; }
