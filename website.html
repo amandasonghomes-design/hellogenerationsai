@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 做网站 · 智启未来研习社</title>
+<meta name="description" content="AI 做网站：用 Muse 生成网站、推送到 GitHub，并用 GitHub Pages 免费托管。">
+<meta name="theme-color" content="#F3F8FF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%238CC8FF'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="/"><span class="logo">✦</span><span data-site-name>智启未来研习社</span></a><nav aria-label="主导航"><a href="/">首页</a><a href="/gallery">作品展览</a><a href="/songs">AI 歌曲</a><a href="/videos">AI 视频</a><a href="/website" aria-current="page">AI 做网站</a><a href="/guide">Quick Guide</a><a href="/startup">AI 创业</a></nav></div></header>
+
+<main>
+<div class="page-head"><div class="wrap">
+  <span class="pill">AI 做网站</span>
+  <h1>🌐 AI 做网站：从想法到上线</h1>
+  <p>让 AI 帮你写网站，再用 GitHub 免费放到网上。看完这页，你就知道每一步该做什么。</p>
+  <p style="margin-top:14px"><a class="btn solid" href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages 官网 ↗</a> <a class="btn ghost" href="https://github.com/" target="_blank" rel="noopener">打开 GitHub ↗</a></p>
+</div></div>
+<section><div class="wrap guide-layout">
+  <aside class="toc" aria-label="目录"><strong class="mono">CONTENTS</strong>
+    <a href="#muse">① Muse 能做什么</a><a href="#pages">② GitHub 怎么托管</a><a href="#flow">③ 五步上线</a><a href="#say">④ 直接对 Muse 说</a><a href="#note">⑤ 小提醒</a></aside>
+  <div>
+
+  <div class="guide-sec" id="muse">
+    <div class="eyebrow">// 01</div><h2>🤖 Muse 能做什么</h2>
+    <p class="lead">Muse 被介绍为一个<b>代码生成助手（coding agent）</b>：能自动编写、修改、调试并部署代码。</p>
+    <div class="grid g2">
+      <div class="card"><div class="ico t-v">🧱</div><h3>生成完整网站</h3><p>HTML / CSS / JS，或小型应用，一句话就能开始。</p></div>
+      <div class="card"><div class="ico t-t">📦</div><h3>创建、更新仓库</h3><p>在 GitHub 新建或修改仓库（需要你授权或提供 token）。</p></div>
+      <div class="card"><div class="ico t-b">⬆️</div><h3>推送代码</h3><p>把写好的代码提交（commit）并推送到 GitHub。</p></div>
+      <div class="card"><div class="ico t-v">🔑</div><h3>帮你完成授权</h3><p>通过 Composio 之类的连接器处理 OAuth 授权和 token 刷新。</p></div>
+    </div>
+    <div class="tip warn">⚠️ 以上是网上对 Muse 的介绍，具体功能请以 Meta 官方说明和你自己的试用为准。</div>
+  </div>
+
+  <div class="guide-sec" id="pages">
+    <div class="eyebrow">// 02</div><h2>📄 GitHub 怎么托管网站</h2>
+    <p class="lead"><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> 可以免费托管任何<b>静态网站</b>（HTML、CSS、JS）。</p>
+    <div class="grid g2">
+      <div class="card"><h3>📌 发布你推送的文件</h3><p>GitHub Pages 会把你推送到仓库里的静态文件发布成网站。</p></div>
+      <div class="card"><h3>🆕 新仓库或旧仓库都行</h3><p>可以在新仓库，也可以在现有仓库里启用 Pages。</p></div>
+      <div class="card"><h3>🏠 两种网址</h3><p><b>用户站点</b>：<code>用户名.github.io</code><br><b>项目站点</b>：<code>用户名.github.io/仓库名</code></p></div>
+      <div class="card"><h3>🚀 推送就上线</h3><p>推送 <code>index.html</code>、<code>index.md</code> 或 <code>README.md</code> 后，网站就能访问。</p></div>
+    </div>
+    <div class="tip">💡 因此：只要 Muse 把网站推到 GitHub，你在仓库设置里启用 Pages，网站就能公开访问。详细说明见 <a href="https://docs.github.com/pages" target="_blank" rel="noopener">GitHub Pages 官方文档 ↗</a>。</div>
+  </div>
+
+  <div class="guide-sec" id="flow">
+    <div class="eyebrow">// 03</div><h2>✅ 典型流程：五步上线</h2>
+    <ol class="steps">
+      <li><b>连接 GitHub</b><span class="en">CONNECT</span><p>让 Muse 连接你的 <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>。它会引导你完成 OAuth 或 token 授权。</p></li>
+      <li><b>生成网站</b><span class="en">CREATE</span><p>告诉 Muse 你要什么，例如：“创建一个带 hero 区和联系表单的简单 landing page。”</p></li>
+      <li><b>推送到 GitHub</b><span class="en">PUSH</span><p>例如：“把这个代码推到一个叫 landing-page 的新仓库。”</p></li>
+      <li><b>启用 Pages</b><span class="en">ENABLE PAGES</span><p>在 GitHub 打开仓库 → <b>Settings</b> → <b>Pages</b>，选择要发布的分支和文件夹。</p></li>
+      <li><b>网站上线</b><span class="en">LIVE</span><p>GitHub Pages 自动发布静态文件，几分钟后就能用网址打开。</p></li>
+    </ol>
+  </div>
+
+  <div class="guide-sec" id="say">
+    <div class="eyebrow">// 04</div><h2>💬 可以直接对 Muse 说</h2>
+    <p class="lead">点“复制”，粘贴给 Muse 就能用。</p>
+    <div class="prompt"><span class="lab">PROMPT · 做网站</span><p>帮我做一个个人作品集网站。</p><button class="copy" type="button">复制</button></div>
+    <div class="prompt"><span class="lab">PROMPT · 做 landing page</span><p>创建一个带 hero 区和联系表单的简单 landing page。</p><button class="copy" type="button">复制</button></div>
+    <div class="prompt"><span class="lab">PROMPT · 推送到 GitHub</span><p>把这个代码推到一个叫 portfolio-site 的 GitHub 仓库。</p><button class="copy" type="button">复制</button></div>
+    <div class="prompt"><span class="lab">PROMPT · 更新网站</span><p>更新首页并再次推送。</p><button class="copy" type="button">复制</button></div>
+  </div>
+
+  <div class="guide-sec" id="note">
+    <div class="eyebrow">// 05</div><h2>🔒 小提醒</h2>
+    <div class="tip warn">⚠️ <b>授权要谨慎</b>：授权后，工具可以修改你的仓库。尽量只开放单个仓库的权限，用完后到 GitHub 设置里撤销。</div>
+    <div class="tip">💡 <b>想要更多功能</b>：本站用的是 GitHub + <a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a>（同样免费，还有访问统计）。GitHub Pages 更简单，适合第一次做网站。</div>
+    <p style="margin-top:18px"><a class="btn solid" href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages ↗</a> <a class="btn ghost" href="https://docs.github.com/pages" target="_blank" rel="noopener">官方文档 ↗</a> <a class="btn ghost" href="https://vercel.com/" target="_blank" rel="noopener">Vercel ↗</a></p>
+  </div>
+
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap"><div><strong data-site-name>智启未来研习社</strong> · AI 公益论坛 · © <span data-year>2026</span></div><p class="disc">免责声明：本网站为非营利公益分享，内容仅供学习与参考。对于因使用或误用本网站内容所造成的任何错误、损失或后果，智启未来研习社及讲者概不负责。<br>Disclaimer: This is a non-profit community site. Content is for educational purposes only; the organizers and contributors are not responsible for any misuse, errors, or losses arising from its use.</p></div></footer>
+
+<script src="/data/site.js"></script>
+<script src="/data/works.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>
