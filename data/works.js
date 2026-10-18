@@ -20,7 +20,8 @@ window.WORKS = [
     author: "Amanda Song",
     category: "video",
     desc: "跟着视频一步步用 Suno 做出自己的 AI 歌曲。",
-    youtube: "jRD8nMxjghw"
+    youtube: "jRD8nMxjghw",
+    also: "song"
   },
   { title: "诗篇 23 篇", author: "Susanna", category: "video",
     desc: "以风景画面配诗篇 23 篇经文字幕的短片，点击播放。",

@@ -437,3 +437,5 @@ a.song-row:hover{border-color:var(--sky-d,#2a6df4);box-shadow:var(--glow)}
 
 .song-block{grid-column:1/-1}
 .song-block .song-head{margin:6px 0 12px}
+
+@media (max-width:560px){nav{flex-wrap:wrap;gap:2px 0}nav a{padding:6px 9px;font-size:13.5px}}

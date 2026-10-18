@@ -69,13 +69,14 @@
         '<div class="body"><h3>' + esc(w.title) + '</h3><div class="by">作者：' + esc(w.author) + '</div><p>' + esc(w.desc) + '</p>' + media + link + '</div></article>';
     }
     function render(){
-      var list = window.WORKS.filter(function(w){ return current === 'all' || w.category === current; });
+      var only = document.body.getAttribute('data-only');
+      var list = window.WORKS.filter(function(w){ if (only) return w.category === only || w.also === only; return current === 'all' || w.category === current; });
       var songs = list.filter(function(w){ return w.category === 'song'; });
       var cards = list.filter(function(w){ return w.category !== 'song'; });
       if (!list.length) { box.hidden = false; box.className = ''; box.innerHTML = '<div class="empty">这个分类还没有作品，欢迎投稿！</div>'; if (songsBox) songsBox.innerHTML = ''; return; }
       box.className = 'grid g3'; box.hidden = false;
       var parts = cards.map(cardHtml);
-      if (songs.length) parts.splice(Math.min(5, parts.length), 0,
+      if (songs.length) parts.splice(Math.min(only === 'song' ? 1 : 5, parts.length), 0,
         '<section class="song-block"><h2 class="song-head">🎵 歌曲 <span>' + songs.length + ' 首</span></h2><div class="song-list">' + songs.map(songRow).join('') + '</div></section>');
       box.innerHTML = parts.join('');
       if (songsBox) songsBox.innerHTML = '';
