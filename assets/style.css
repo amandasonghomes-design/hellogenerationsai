@@ -616,3 +616,57 @@ h2{font-size:clamp(21px,2.8vw,27px);font-weight:600;letter-spacing:.01em}
   .guide-sec .card > *:not(.ico):not(h3){grid-column:1 / -1}
   .guide-sec .card p{font-size:14px;line-height:1.55;margin:0}
 }
+
+/* ===== Phone density pass: concise, compact "technical" feel ===== */
+@media (max-width:640px){
+  section{padding:20px 0 6px}
+  h2{font-size:19px;margin-bottom:4px}
+  .lead{font-size:14px;margin:0 0 10px;line-height:1.5}
+  .page-head{padding:18px 0 16px}
+  .page-head h1{font-size:24px;margin:8px 0 4px}
+  .page-head p{font-size:14px;line-height:1.5}
+  .page-head .pill,.pill{font-size:12px;padding:3px 10px}
+  .card{padding:12px 14px}
+  .card h3{margin:0 0 3px;font-size:16px}
+  .card p{font-size:14px;line-height:1.5}
+  /* guide */
+  .toc{padding:8px 10px;gap:2px 4px}
+  .toc strong{margin:0 4px 2px;font-size:11px}
+  .toc a{padding:4px 9px;font-size:13px;border-radius:999px}
+  .guide-sec{padding-bottom:18px}
+  .guide-sec .card{display:block;padding:10px 12px}
+  .guide-sec .card:has(.ico){display:grid}
+  .guide-sec .card h3{margin:0 0 2px;font-size:16px}
+  .guide-sec .card:has(.ico) h3{margin:0}
+  .guide-sec .card .ico{width:30px;height:30px;font-size:15px}
+  .guide-sec .card p{font-size:13.5px;line-height:1.5}
+  .steps{gap:6px;margin-top:10px}
+  .steps li{padding:9px 12px 9px 46px}
+  .steps li::before{left:10px;top:9px;width:26px;height:26px;font-size:13px}
+  .steps b{font-size:15px}
+  .steps .en{font-size:11px;margin-left:6px}
+  .steps p{font-size:13.5px;line-height:1.45;margin-top:2px}
+  .formula{grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+  .formula div{padding:7px 10px;border-radius:12px;display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline}
+  .formula small{font-size:11px;grid-column:1 / -1}
+  .formula b{font-size:15px}
+  .formula span{font-size:12px}
+  .prompt{padding:10px 12px;margin-top:10px}
+  .prompt .lab{font-size:10.5px;padding:2px 9px;margin-bottom:6px}
+  .prompt p{font-size:14px;line-height:1.55;margin:0 0 30px}
+  .prompt .pl{font-size:14px;line-height:1.6}
+  .copy{right:10px;bottom:8px;padding:4px 12px;font-size:13px;min-height:30px}
+  .tip{padding:8px 12px;margin-top:10px;font-size:13.5px;line-height:1.5;border-radius:12px}
+  .chips{gap:6px;margin-top:6px}
+  .chips span{padding:2px 10px;font-size:13px}
+  .path-card{padding:12px;margin-top:10px}
+  .path-card h3{font-size:16px;margin:6px 0 3px}
+  .path-card>p{font-size:13.5px;line-height:1.5}
+  .video-card{margin:10px 0 4px;padding:8px}
+  .video-card figcaption{padding:8px 2px 2px;gap:2px}
+  .video-card figcaption span,.video-card figcaption a{font-size:13px}
+  .pl{gap:4px;font-size:13.5px;margin-top:4px;padding-left:18px}
+  .guide-sec.opc{padding:12px}
+  .grid{gap:8px}
+  .disc{font-size:12.5px;line-height:1.55}
+}
