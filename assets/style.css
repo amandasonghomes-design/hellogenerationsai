@@ -677,3 +677,4 @@ h2{font-size:clamp(21px,2.8vw,27px);font-weight:600;letter-spacing:.01em}
 .card p small{font-size:12.5px;word-break:break-all}
 .btnrow{display:flex;gap:8px;flex-wrap:nowrap;margin:12px 0 0}
 .btnrow .btn{padding:8px 14px;font-size:14px;white-space:nowrap}
+.steps li .tip{margin-top:8px}
