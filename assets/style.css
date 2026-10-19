@@ -561,3 +561,13 @@ h2{font-size:clamp(21px,2.8vw,27px);font-weight:600;letter-spacing:.01em}
 .card h3,.work h3{font-weight:600}
 .card h3{font-size:18px}
 @media (max-width:640px){.home a.card h3{font-size:16px}}
+
+/* ===== Round 3: spiral mark (small) + name text (larger) ===== */
+.brand{display:flex;align-items:center;gap:8px}
+.brand-mark{height:24px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(4,25,90,.45))}
+.brand-text{height:21px;width:auto;display:block;filter:drop-shadow(0 1px 6px rgba(4,25,90,.45))}
+@media (min-width:901px){.brand-mark{height:30px}.brand-text{height:26px}}
+.hero h1 .hero-name{display:block;width:min(300px,76%);height:auto;margin:0 0 12px;filter:drop-shadow(0 3px 14px rgba(4,25,90,.4))}
+@media (min-width:901px){.hero h1 .hero-name{width:360px}}
+.hero h1 .brush{font-size:clamp(20px,4.6vw,30px);line-height:1.35;letter-spacing:.06em}
+.hero h1 .brush .nb{display:inline-block;margin-right:.3em}
