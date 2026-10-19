@@ -517,3 +517,47 @@ footer{background:linear-gradient(135deg,#06236B,#0A3FA8 60%,#1565D8);color:#D7E
 footer .disc,footer p,footer div{color:#C5DBF8}
 footer strong{color:#fff}
 footer a{color:#fff}
+
+/* ===== Round 2: smaller header logo, starry blue header, lighter titles ===== */
+.brand-logo{height:24px}
+@media (min-width:901px){.brand-logo{height:27px}}
+.hero h1 .brush .en{font-family:var(--font);font-weight:700;letter-spacing:.02em}
+.hero h1{margin-top:18px}
+/* starry blue header */
+.site-header{position:sticky;background:
+   radial-gradient(1.3px 1.3px at 6% 30%,rgba(255,255,255,.9),transparent),
+   radial-gradient(1px 1px at 14% 72%,rgba(255,255,255,.7),transparent),
+   radial-gradient(1.6px 1.6px at 23% 22%,rgba(200,230,255,.95),transparent),
+   radial-gradient(1px 1px at 33% 80%,rgba(255,255,255,.65),transparent),
+   radial-gradient(1.2px 1.2px at 44% 18%,rgba(255,255,255,.85),transparent),
+   radial-gradient(1px 1px at 52% 66%,rgba(200,230,255,.8),transparent),
+   radial-gradient(1.5px 1.5px at 61% 28%,rgba(255,255,255,.9),transparent),
+   radial-gradient(1px 1px at 69% 84%,rgba(255,255,255,.6),transparent),
+   radial-gradient(1.3px 1.3px at 78% 20%,rgba(200,230,255,.9),transparent),
+   radial-gradient(1px 1px at 86% 62%,rgba(255,255,255,.75),transparent),
+   radial-gradient(1.6px 1.6px at 93% 30%,rgba(255,255,255,.95),transparent),
+   radial-gradient(260px 120px at 90% -20%,rgba(120,183,245,.55),transparent 70%),
+   radial-gradient(300px 140px at 8% 130%,rgba(30,120,221,.55),transparent 70%),
+   linear-gradient(100deg,#051B58,#0A3FA8 50%,#1565D8) !important;
+  backdrop-filter:none;border-bottom:1px solid rgba(190,225,255,.28);box-shadow:0 4px 18px rgba(6,35,107,.25)}
+.site-header::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+   radial-gradient(1.4px 1.4px at 10% 55%,#fff,transparent),
+   radial-gradient(1.2px 1.2px at 28% 40%,#dff0ff,transparent),
+   radial-gradient(1.5px 1.5px at 48% 78%,#fff,transparent),
+   radial-gradient(1.2px 1.2px at 66% 50%,#dff0ff,transparent),
+   radial-gradient(1.5px 1.5px at 82% 76%,#fff,transparent),
+   radial-gradient(1.2px 1.2px at 96% 52%,#fff,transparent);
+  animation:hdr-twinkle 4.5s ease-in-out infinite alternate}
+@keyframes hdr-twinkle{from{opacity:.25}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.site-header::before{animation:none;opacity:.7}}
+.site-header .wrap{position:relative;z-index:1}
+.site-header nav a{color:#D3E5FF;border-bottom-color:transparent}
+.site-header nav a:hover{background:rgba(255,255,255,.14);color:#fff;border-bottom-color:transparent}
+.site-header nav a[aria-current="page"]{background:#fff;color:var(--brand-deep);border-bottom-color:transparent;box-shadow:0 2px 10px rgba(4,25,90,.3)}
+.brand-logo{filter:drop-shadow(0 1px 6px rgba(4,25,90,.45))}
+/* lighter, smaller section titles */
+h2{font-size:clamp(21px,2.8vw,27px);font-weight:600;letter-spacing:.01em}
+.card h3,.work h3{font-weight:600}
+.card h3{font-size:18px}
+@media (max-width:640px){.home a.card h3{font-size:16px}}
