@@ -31,7 +31,7 @@
     <p class="lead">Muse 被介绍为一个<b>代码生成助手（coding agent）</b>：能自动编写、修改、调试并部署代码。</p>
     <div class="grid g2">
       <div class="card"><div class="ico t-v">🧱</div><h3>生成完整网站</h3><p>HTML / CSS / JS，或小型应用，一句话就能开始。</p></div>
-      <div class="card"><div class="ico t-t">📦</div><h3>创建、更新仓库</h3><p>在 GitHub 新建或修改仓库（需要你授权或提供 token）。</p></div>
+      <div class="card"><div class="ico t-t">📦</div><h3>创建、更新仓库（repo）</h3><p>在 GitHub 新建或修改仓库（repo；需要你授权或提供 token）。</p></div>
       <div class="card"><div class="ico t-b">⬆️</div><h3>推送代码</h3><p>把写好的代码提交（commit）并推送到 GitHub。</p></div>
       <div class="card"><div class="ico t-v">🔑</div><h3>帮你完成授权</h3><p>通过 Composio 之类的连接器处理 OAuth 授权和 token 刷新。</p></div>
     </div>
@@ -42,12 +42,12 @@
     <div class="eyebrow">// 02</div><h2>📄 GitHub 怎么托管网站</h2>
     <p class="lead"><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> 可以免费托管任何<b>静态网站</b>（HTML、CSS、JS）。</p>
     <div class="grid g2">
-      <div class="card"><h3>📌 发布你推送的文件</h3><p>GitHub Pages 会把你推送到仓库里的静态文件发布成网站。</p></div>
-      <div class="card"><h3>🆕 新仓库或旧仓库都行</h3><p>可以在新仓库，也可以在现有仓库里启用 Pages。</p></div>
+      <div class="card"><h3>📌 发布你推送的文件</h3><p>GitHub Pages 会把你推送到仓库（repo）里的静态文件发布成网站。</p></div>
+      <div class="card"><h3>🆕 新仓库或旧仓库（repo）都行</h3><p>可以在新仓库，也可以在现有仓库里启用 Pages。</p></div>
       <div class="card"><h3>🏠 托管的网址</h3><p><b>项目站点</b>：<code>用户名.github.io/仓库名</code><br><small>例如：<a href="https://amandasonghomes-design.github.io/angieartgallery/" target="_blank" rel="noopener"><code>amandasonghomes-design.github.io/angieartgallery/</code></a></small></p></div>
       <div class="card"><h3>🚀 推送就上线</h3><p>推送 <code>index.html</code>、<code>index.md</code> 或 <code>README.md</code> 后，网站就能访问。</p></div>
     </div>
-    <div class="tip">💡 因此：只要 Muse 把网站推到 GitHub，你在仓库设置里启用 Pages，网站就能公开访问。详细说明见 <a href="https://docs.github.com/pages" target="_blank" rel="noopener">GitHub Pages 官方文档 ↗</a>。</div>
+    <div class="tip">💡 因此：只要 Muse 把网站推到 GitHub，你在仓库（repo）设置里启用 Pages，网站就能公开访问。详细说明见 <a href="https://docs.github.com/pages" target="_blank" rel="noopener">GitHub Pages 官方文档 ↗</a>。</div>
   </div>
 
   <div class="guide-sec" id="flow">
@@ -56,8 +56,8 @@
       <li class="gh"><b>创建 GitHub 账号</b><span class="en">SIGN UP</span><p>先到 <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> 注册。可以用邮箱新建账号，也可以直接用 Google（Gmail）等账号登录。已有账号就直接登录。</p></li>
       <li><b>连接 GitHub</b><span class="en">CONNECT</span><p>让 Muse 连接你的 <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>。它会引导你完成 OAuth 或 token 授权。</p></li>
       <li><b>生成网站</b><span class="en">CREATE</span><p>告诉 Muse 你要什么，例如：“创建一个带 hero 区和联系表单的简单 landing page。”<br><small>（<b>hero 区</b> = 页面最上方的大标题 + 按钮；<b>landing page</b> = 单页宣传网站）</small></p></li>
-      <li><b>推送到 GitHub</b><span class="en">PUSH</span><p>例如：“把这个代码推到一个叫 landing-page 的新仓库。”</p></li>
-      <li><b>启用 Pages</b><span class="en">ENABLE PAGES</span><p>在 GitHub 打开仓库 → <b>Settings</b> → <b>Pages</b>，选择要发布的分支和文件夹。</p></li>
+      <li><b>推送到 GitHub</b><span class="en">PUSH</span><p>例如：“把这个代码推到一个叫 landing-page 的新仓库（repo）。”</p></li>
+      <li><b>启用 Pages</b><span class="en">ENABLE PAGES</span><p>在 GitHub 打开仓库（repo） → <b>Settings</b> → <b>Pages</b>，选择要发布的分支和文件夹。</p></li>
       <li><b>网站上线</b><span class="en">LIVE</span><p>GitHub Pages 自动发布静态文件，几分钟后就能用网址打开。</p></li>
     </ol>
   </div>
@@ -73,7 +73,7 @@
 
   <div class="guide-sec" id="note">
     <div class="eyebrow">// 05</div><h2>🔒 小提醒</h2>
-    <div class="tip warn">⚠️ <b>授权要谨慎</b>：授权后，工具可以修改你的仓库。尽量只开放单个仓库的权限，用完后到 GitHub 设置里撤销。</div>
+    <div class="tip warn">⚠️ <b>授权要谨慎</b>：授权后，工具可以修改你的仓库（repo）。尽量只开放单个仓库（repo）的权限，用完后到 GitHub 设置里撤销。</div>
     <div class="tip">💡 <b>想要更多功能</b>：本站用的是 GitHub + <a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a>（同样免费，还有访问统计）。GitHub Pages 更简单，适合第一次做网站。</div>
     <p style="margin-top:18px"><a class="btn solid" href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages ↗</a> <a class="btn ghost" href="https://docs.github.com/pages" target="_blank" rel="noopener">官方文档 ↗</a> <a class="btn ghost" href="https://vercel.com/" target="_blank" rel="noopener">Vercel ↗</a></p>
   </div>
