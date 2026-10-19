@@ -467,3 +467,53 @@ a.song-row:hover{border-color:var(--sky-d,#2a6df4);box-shadow:var(--glow)}
   .home a.card::after{content:"›";grid-row:1;grid-column:3;font-size:24px;line-height:1;color:var(--sky-d,#2a6df4);font-weight:700}
   .home a.card:hover{transform:none}
 }
+
+/* ================= Brand blue (matches the logo) ================= */
+:root{
+  --brand-deep:#0A3FA8; --brand:#1565D8; --brand-mid:#2E8BEA; --brand-light:#78B7F5; --brand-pale:#EAF3FF;
+  --brush:"Ma Shan Zheng","Zhi Mang Xing","Xingkai SC","STXingkai","STKaiti","KaiTi","楷体",serif;
+  --bg:#F4F8FE; --sky:#8EC2F7; --lav:#5FA3F0; --pink:#B5D4FA; --mint:#9CCBF3; --peach:#D5E6FB;
+  --sky-d:#1565D8; --lav-d:#0F4FB8; --pink-d:#1565D8; --mint-d:#1C7FC0;
+  --navy:#0A3FA8; --navy-d:#072E7E;
+  --line:rgba(21,101,216,.18); --shadow:0 10px 30px rgba(21,101,216,.12);
+  --glow:0 0 0 1px rgba(46,139,234,.35),0 8px 28px rgba(21,101,216,.16);
+}
+body{background:
+  radial-gradient(900px 520px at 8% -5%,rgba(46,139,234,.16),transparent 60%),
+  radial-gradient(820px 520px at 100% 8%,rgba(120,183,245,.2),transparent 60%),
+  radial-gradient(900px 600px at 50% 105%,rgba(21,101,216,.1),transparent 60%),
+  var(--bg);background-attachment:fixed}
+/* logo in header */
+.brand-logo{height:34px;width:auto;display:block}
+@media (min-width:901px){.brand-logo{height:38px}}
+/* blue gradient band behind hero + page headers (stars/meteors stay on top) */
+.hero,.page-head{background:
+   linear-gradient(rgba(190,225,255,.10) 1px,transparent 1px) 0 0/40px 40px,
+   linear-gradient(90deg,rgba(190,225,255,.10) 1px,transparent 1px) 0 0/40px 40px,
+   radial-gradient(700px 420px at 82% 25%,rgba(120,183,245,.42),transparent 65%),
+   radial-gradient(600px 400px at 5% 100%,rgba(10,63,168,.55),transparent 65%),
+   linear-gradient(135deg,#06236B,#0A3FA8 45%,#1E78DD 100%) !important}
+.hero p,.page-head p{color:#D7E8FF !important}
+.hero .pill,.page-head .pill{color:#E3F1FF !important;border-color:rgba(190,225,255,.4) !important;background:rgba(255,255,255,.1) !important}
+.hero .btn.primary{background:#fff !important;color:var(--brand-deep) !important;box-shadow:0 8px 22px rgba(4,25,90,.35)}
+.hero .btn.primary:hover{background:#EAF3FF !important}
+.hero .btn.ghost{color:#fff !important;border-color:rgba(255,255,255,.55) !important}
+.orbs.hero-art{border-color:rgba(190,225,255,.4) !important;box-shadow:0 0 40px rgba(120,183,245,.35)}
+/* home hero: big logo + brush-script tagline */
+.hero h1{font-size:inherit;line-height:1.2;margin:16px 0 14px}
+.hero-logo{width:min(520px,94%);height:auto;margin:0 0 10px;filter:drop-shadow(0 4px 18px rgba(4,25,90,.35))}
+.hero h1 .brush{display:block;font-family:var(--brush);font-weight:400;font-size:clamp(34px,6.4vw,62px);line-height:1.25;letter-spacing:.05em;
+  background:linear-gradient(90deg,#fff 0%,#CFE6FF 55%,#8EC2F7 100%);-webkit-background-clip:text;background-clip:text;color:transparent !important}
+/* buttons, chips, icons, accents in blue gradient */
+.btn.primary,.btn.solid{background:linear-gradient(135deg,var(--brand-deep),var(--brand-mid)) !important;color:#fff;box-shadow:0 8px 22px rgba(21,101,216,.28)}
+.btn.primary:hover,.btn.solid:hover{background:linear-gradient(135deg,#08358F,#1F7BE0) !important}
+.ico.t-b,.ico.t-r,.ico.t-t,.ico.t-v,.ico.t-a{background:linear-gradient(135deg,#E3F0FF,#BBD8FA)}
+.submit{background:linear-gradient(135deg,rgba(142,194,247,.55),rgba(95,163,240,.35))}
+nav a[aria-current="page"]{background:linear-gradient(135deg,#1565D8,#2E8BEA);color:#fff;border-bottom-color:transparent}
+.chip[aria-pressed="true"]{background:linear-gradient(135deg,var(--brand-deep),var(--brand-mid));color:#fff;border-color:transparent}
+.eyebrow{color:var(--brand)}
+h2{color:#0F2A66}
+footer{background:linear-gradient(135deg,#06236B,#0A3FA8 60%,#1565D8);color:#D7E8FF;border-top:0}
+footer .disc,footer p,footer div{color:#C5DBF8}
+footer strong{color:#fff}
+footer a{color:#fff}
