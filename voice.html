@@ -139,8 +139,9 @@
     try {
       for (var i = 0; i < list.length; i++) {
         say('正在生成声音… ' + (i + 1) + ' / ' + list.length);
-        var r = await fetch('/api/tts', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: list[i], voice: voice, rate: +rate.value, pitch: +pitch.value }) });
+        var ac = new AbortController(), tm = setTimeout(function(){ ac.abort(); }, 25000);
+        var r = await fetch('/api/tts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ac.signal,
+          body: JSON.stringify({ text: list[i], voice: voice, rate: +rate.value, pitch: +pitch.value }) }).finally(function(){ clearTimeout(tm); });
         if (!r.ok) { var d = ''; try { var j = await r.json(); d = j.detail || j.error || ''; } catch(x){} throw new Error('HTTP ' + r.status + (d ? '：' + d : '')); }
         blobs.push(await r.blob());
         if (my !== token) return;

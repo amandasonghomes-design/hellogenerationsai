@@ -9,7 +9,12 @@ const MAX_CHARS = 700;
 function pct(n, lo, hi) { n = Math.round(Number(n) || 0); return Math.max(lo, Math.min(hi, n)); }
 
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ error: 'POST only' }); }
+  if (req.method === 'GET') {
+    // quick self-check: can the library be loaded?
+    try { const m = await import('edge-tts-universal'); return res.status(200).json({ ok: true, node: process.version, exports: Object.keys(m).slice(0, 20) }); }
+    catch (e) { return res.status(500).json({ ok: false, node: process.version, detail: String((e && e.message) || e).slice(0, 200) }); }
+  }
+  if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return res.status(405).json({ error: 'POST only' }); }
   try {
     const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
     const text = String(b.text || '').trim();
@@ -21,7 +26,10 @@ module.exports = async function handler(req, res) {
     const opts = { rate: (rate >= 0 ? '+' : '') + rate + '%', pitch: (hz >= 0 ? '+' : '') + hz + 'Hz' };
     const mod = await import('edge-tts-universal');
     const tts = new mod.EdgeTTS(text, voice, opts);
-    const result = await tts.synthesize();
+    const result = await Promise.race([
+      tts.synthesize(),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout: no reply from the voice service in 8s')), 8000))
+    ]);
     const a = result.audio;
     const buf = Buffer.isBuffer(a) ? a : Buffer.from(await a.arrayBuffer());
     if (!buf.length) throw new Error('empty audio');
