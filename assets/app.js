@@ -159,3 +159,18 @@
     spaces[s].appendChild(wrap);
   }
 })();
+
+/* Swipeable nav: centre the current tab, show edge fades while more can be scrolled */
+(function(){
+  var nav = document.querySelector('.site-header nav'); if (!nav) return;
+  function edges(){
+    var max = nav.scrollWidth - nav.clientWidth;
+    nav.classList.toggle('fade-l', nav.scrollLeft > 4);
+    nav.classList.toggle('fade-r', max > 4 && nav.scrollLeft < max - 4);
+  }
+  var cur = nav.querySelector('[aria-current="page"]');
+  if (cur) { var max0 = nav.scrollWidth - nav.clientWidth; if (max0 > 0) nav.scrollLeft = Math.max(0, Math.min(max0, cur.offsetLeft - (nav.clientWidth - cur.offsetWidth) / 2)); }
+  nav.addEventListener('scroll', edges, { passive: true });
+  window.addEventListener('resize', edges);
+  edges();
+})();

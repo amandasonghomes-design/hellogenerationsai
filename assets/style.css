@@ -439,3 +439,16 @@ a.song-row:hover{border-color:var(--sky-d,#2a6df4);box-shadow:var(--glow)}
 .song-block .song-head{margin:6px 0 12px}
 
 @media (max-width:560px){nav{flex-wrap:wrap;gap:2px 0}nav a{padding:6px 9px;font-size:13.5px}}
+
+/* Swipeable one-row nav (all widths) */
+.site-header .wrap{min-width:0}
+.site-header nav{min-width:0;max-width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;scroll-snap-type:x proximity}
+.site-header nav::-webkit-scrollbar{display:none}
+.site-header nav a{flex:none;white-space:nowrap;scroll-snap-align:center}
+@media (max-width:900px){
+  .site-header .wrap{flex-direction:column;align-items:stretch;gap:6px}
+  .site-header nav{margin:0 -4px;padding:0 4px}
+}
+.site-header nav.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.site-header nav.fade-l{-webkit-mask-image:linear-gradient(270deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(270deg,#000 calc(100% - 28px),transparent)}
+.site-header nav.fade-l.fade-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
