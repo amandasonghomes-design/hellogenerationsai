@@ -1,0 +1,7 @@
+{
+  "name": "zhiqi-site",
+  "private": true,
+  "dependencies": {
+    "edge-tts-universal": "latest"
+  }
+}
