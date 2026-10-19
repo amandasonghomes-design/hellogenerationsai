@@ -596,3 +596,10 @@ h2{font-size:clamp(21px,2.8vw,27px);font-weight:600;letter-spacing:.01em}
 .site-header .brand-text{height:23px}
 @media (min-width:901px){.site-header .brand-text{height:28px}.site-header .brand-mark{height:32px}
   .site-header .navbar .wrap{justify-content:flex-start}}
+
+/* ===== Round 5: three hero buttons in one row ===== */
+.btns.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:460px}
+.btns.tri .btn{justify-content:center;text-align:center;padding:12px 6px;white-space:nowrap;font-size:16px}
+.hero h1{margin-top:6px}
+.hero .wrap{grid-template-columns:1fr !important}
+.hero{padding-bottom:36px}
