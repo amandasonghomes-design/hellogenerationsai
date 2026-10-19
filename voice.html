@@ -141,7 +141,7 @@
         say('正在生成声音… ' + (i + 1) + ' / ' + list.length);
         var r = await fetch('/api/tts', { method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: list[i], voice: voice, rate: +rate.value, pitch: +pitch.value }) });
-        if (!r.ok) throw new Error('http ' + r.status);
+        if (!r.ok) { var d = ''; try { var j = await r.json(); d = j.detail || j.error || ''; } catch(x){} throw new Error('HTTP ' + r.status + (d ? '：' + d : '')); }
         blobs.push(await r.blob());
         if (my !== token) return;
       }
@@ -154,10 +154,11 @@
       audio.play().catch(function(){});
     } catch (e) {
       if (my !== token) return;
+      var why = '（原因：' + String((e && e.message) || e).slice(0, 160) + '）';
       if (hasSynth && devVoices.length) {
-        say('在线声音暂时用不了，已改用本机声音朗读（不能下载）。');
+        say('在线声音暂时用不了' + why + '，已改用本机声音朗读（不能下载）。');
         var opt = sel.querySelector('option[value^="d:"]'); if (opt) { sel.value = opt.value; update(); speakDevice(s); }
-      } else say('在线声音暂时用不了，请稍后再试。');
+      } else say('在线声音暂时用不了' + why + '，请把这行字发给管理员。');
     } finally { playBtn.disabled = false; }
   }
 

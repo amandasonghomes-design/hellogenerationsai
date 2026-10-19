@@ -30,6 +30,6 @@ module.exports = async function handler(req, res) {
     return res.status(200).send(buf);
   } catch (e) {
     console.error('tts failed', e && e.message);
-    return res.status(502).json({ error: 'tts failed' });
+    return res.status(502).json({ error: 'tts failed', detail: String((e && e.message) || e).slice(0, 200) });
   }
 };
