@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 游戏 · 智启未来研习社</title>
+<meta name="description" content="Doodle Derby：画一匹马，给它起名，然后让它参加比赛。画得好不好，决定它跑多快。">
+<meta name="theme-color" content="#F3F8FF">
+<link rel="icon" type="image/png" href="/media/logo-mark.png"><link rel="apple-touch-icon" href="/media/logo-mark.png">
+<link rel="stylesheet" href="/assets/style.css">
+<style>.gamebox{width:100%;border:0;display:block;min-height:420px;border-radius:14px}</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="topbar"><div class="wrap"><a class="brand" href="/"><img class="brand-mark" src="/media/logo-mark-blue.png" alt="" width="218" height="181"><img class="brand-text" src="/media/logo-text-blue.png" alt="智启未来研习社" width="788" height="124"></a></div></div><div class="navbar"><div class="wrap"><nav aria-label="主导航"><a href="/">首页</a><a href="/gallery">作品展览</a><a href="/songs">AI 歌曲</a><a href="/videos">AI 视频</a><a href="/website">AI 做网站</a><a href="/guide">Quick Guide</a><a href="/startup">AI 创业</a><a href="/game" aria-current="page">AI 游戏</a></nav></div></div></header>
+
+<main>
+<div class="page-head"><div class="wrap">
+  <span class="pill pink">AI Game</span>
+  <h1>画一匹马，然后让它赛跑</h1>
+  <p>用手指画一匹马，起个名字，再和三匹对手比赛。腿画在对的地方，跑得更快。</p>
+</div></div>
+<section><div class="wrap">
+  <iframe class="gamebox" id="derby" src="/doodle-derby?embed" title="Doodle Derby 赛马游戏" loading="lazy"></iframe>
+  <p style="margin-top:12px;color:var(--muted,#5b6b86);font-size:13px">这个小游戏由 AI 帮忙做成，纯娱乐。画的马不会被上传或保存。</p>
+</div></section>
+</main>
+
+<footer><div class="wrap"><div><strong data-site-name>智启未来研习社</strong> · AI 公益论坛 · © <span data-year>2026</span></div><p class="disc">免责声明：本网站为非营利公益分享，内容仅供学习与参考。对于因使用或误用本网站内容所造成的任何错误、损失或后果，智启未来研习社及讲者概不负责。<br>Disclaimer: This is a non-profit community site. Content is for educational purposes only; the organizers and contributors are not responsible for any misuse, errors, or losses arising from its use.</p></div></footer>
+<script>
+(function(){
+  var f=document.getElementById('derby');
+  function fit(){try{var d=f.contentDocument;if(d&&d.body)f.style.height=Math.max(420,d.body.offsetHeight+4)+'px'}catch(e){}}
+  f.addEventListener('load',function(){fit();try{new ResizeObserver(fit).observe(f.contentDocument.body)}catch(e){setInterval(fit,600)}});
+  window.addEventListener('resize',fit);
+})();
+</script>
+<script src="/data/site.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

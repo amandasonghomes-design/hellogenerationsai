@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>if(/[?&]embed/.test(location.search)){document.documentElement.setAttribute("data-theme","light");document.documentElement.setAttribute("data-embed","")}</script>
+<title>Doodle Derby</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a race-day programme. Hairline-ruled rows, mono labels, numbered bibs that mean lane numbers. Paper canvas is always light so ink reads in both themes. */
+:root{
+  --bg:#E8EEF6; --surface:#FFFFFF; --ink:#101B33; --muted:#566684; --line:#C8D4E4;
+  --silk:#DE343A; --silk-ink:#FFFFFF; --turf:#2B8556; --turf2:#34955F; --gold:#F2B300; --paper:#F7FAFD; --grid:#DCE5F1;
+  --display:'Bricolage Grotesque','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --body:'Instrument Sans','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --mono:'DM Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1222; --surface:#141E36; --ink:#EAF0FB; --muted:#93A3C0; --line:#27354F;
+  --silk:#F0484D; --turf:#1E6A43; --turf2:#237A4C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1222; --surface:#141E36; --ink:#EAF0FB; --muted:#93A3C0; --line:#27354F;
+  --silk:#F0484D; --turf:#1E6A43; --turf2:#237A4C; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.45;
+  padding-block:14px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em;white-space:nowrap}
+.brand svg{width:22px;height:22px;color:var(--silk)}
+.tools{display:flex;gap:6px}
+.chip{white-space:nowrap;font:500 12px var(--mono);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 9px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid var(--silk);outline-offset:2px}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,9vw,54px);line-height:.98;letter-spacing:-.035em;margin:6px 0 0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--silk)}
+.lede{color:var(--muted);margin:8px 0 0;max-width:46ch}
+
+.pad{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:10px}
+.padtop{display:flex;justify-content:space-between;align-items:center;gap:8px;font:400 12px var(--mono);color:var(--muted)}
+.sheet{position:relative;border-radius:8px;overflow:hidden;background:var(--paper);aspect-ratio:4/3;touch-action:none}
+.sheet canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.padbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.swatches{display:flex;gap:8px}
+.sw{width:28px;height:28px;border-radius:50%;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.txtbtn{white-space:nowrap;font:500 13px var(--body);background:none;border:0;color:var(--ink);padding:6px 4px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.scout{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);padding-top:8px;gap:6px}
+.scout div{min-width:0}
+.scout dt{font:400 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.scout dd{margin:2px 0 0;font:500 14px var(--mono);font-variant-numeric:tabular-nums}
+.entry{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.entry label{flex:1 1 180px;min-width:0;display:flex;flex-direction:column;gap:4px;font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.entry input{font:600 20px var(--display);color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--ink);padding:4px 0;border-radius:0;width:100%}
+.go{font:800 17px var(--display);letter-spacing:-.01em;background:var(--silk);color:var(--silk-ink);border:0;border-radius:10px;padding:14px 20px;cursor:pointer;flex:1 1 150px}
+.go:active{transform:translateY(1px)}
+.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.note{font:400 12px var(--mono);color:var(--muted)}
+
+.track{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
+#race{width:100%;aspect-ratio:400/330;display:block;border-radius:8px;background:var(--turf)}
+#ticker{min-height:2.6em;font:500 14px var(--body);display:flex;align-items:center;gap:8px}
+#ticker b{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--silk)}
+.results{display:flex;flex-direction:column;gap:12px}
+.rank{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.rank li{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bib{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:500 13px var(--mono);background:var(--ink);color:var(--bg)}
+.rank li.first .bib{background:var(--gold);color:#101B33}
+.rank .nm{font:800 17px var(--display);letter-spacing:-.01em;min-width:0;overflow-wrap:anywhere}
+.rank .nm small{display:block;font:400 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.rank .tm{font:500 14px var(--mono);font-variant-numeric:tabular-nums}
+.rank li.me .nm{color:var(--silk)}
+.verdict{font:800 clamp(22px,6vw,30px)/1.05 var(--display);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+html[data-theme="light"][data-embed] body{padding-block:0 8px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 20V10a6 6 0 0 1 12 0v10"/><path d="M6 15h3M15 15h3"/></svg>
+      Doodle Derby
+    </div>
+    <div class="tools">
+      <button class="chip" id="langBtn" type="button" aria-label="Language">中文</button>
+      <button class="chip" id="soundBtn" type="button" aria-pressed="false"></button>
+    </div>
+  </header>
+
+  <main id="screenDraw" class="wrap" style="gap:18px;padding:0">
+    <section>
+      <div class="eyebrow" data-t="eyebrow"></div>
+      <h1 data-t="h1" data-html></h1>
+      <p class="lede" data-t="lede"></p>
+    </section>
+
+    <section class="pad" aria-label="Drawing pad">
+      <div class="padtop"><span data-t="padhint"></span><button class="txtbtn" id="faceBtn" type="button"></button></div>
+      <div class="sheet" id="sheet"><canvas id="pad" aria-label="Drawing canvas" tabindex="0"></canvas></div>
+      <div class="padbar">
+        <div class="swatches" id="swatches" role="group" aria-label="Ink colour"></div>
+        <div><button class="txtbtn" id="undoBtn" type="button" data-t="undo"></button> <button class="txtbtn" id="clearBtn" type="button" data-t="clear"></button></div>
+      </div>
+      <dl class="scout" style="margin:0">
+        <div><dt data-t="sLegs"></dt><dd id="vLegs">-</dd></div>
+        <div><dt data-t="sSpeed"></dt><dd id="vSpeed">-</dd></div>
+        <div><dt data-t="sHeart"></dt><dd id="vHeart">-</dd></div>
+        <div><dt data-t="sType"></dt><dd id="vType" style="font-size:12px;overflow-wrap:anywhere">-</dd></div>
+      </dl>
+    </section>
+
+    <form class="entry" id="entry">
+      <label for="horseName"><span data-t="nameLabel"></span><input id="horseName" maxlength="22" autocomplete="off" value="Sir Scribble"></label>
+      <button class="go" type="submit" data-t="enter"></button>
+    </form>
+    <p class="note" data-t="sample"></p>
+  </main>
+
+  <main id="screenRace" class="wrap" style="gap:14px;padding:0" hidden>
+    <section class="track">
+      <canvas id="race" aria-label="Race track"></canvas>
+      <div id="ticker" aria-live="polite"></div>
+    </section>
+    <section class="results" id="results" hidden>
+      <p class="verdict" id="verdict"></p>
+      <ol class="rank" id="rank"></ol>
+      <p class="note" id="record"></p>
+      <div class="btns">
+        <button class="go" id="againBtn" type="button" data-t="again"></button>
+        <button class="go alt" id="redrawBtn" type="button" data-t="redraw"></button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- text ---------- */
+var I18N={
+ en:{eyebrow:'Race day · entries open',h1:'Draw it.<br>Name it. <em>Race it.</em>',lede:'Sketch any horse you like. Your drawing sets the speed: legs where legs belong help a lot.',
+  padhint:'Draw with finger or mouse',undo:'Undo',clear:'Clear',sLegs:'Legs',sSpeed:'Speed',sHeart:'Heart',sType:'Class',nameLabel:'Name your horse',enter:'Enter the race',
+  sample:'A sample horse is on the pad. Clear it to draw your own.',faceR:'Faces right →',faceL:'← Faces left',soundOn:'Sound on',soundOff:'Sound off',
+  again:'Race again',redraw:'Draw a new horse',go:'GO!',gates:'Into the gates',empty:'Draw something first',
+  record:function(w,r){return 'Stable record: '+w+' win'+(w==1?'':'s')+' from '+r+' race'+(r==1?'':'s')},
+  types:{0:'Mystery',1:'Pogo stick',2:'Biped',3:'Tripod',4:'Textbook horse',5:'Bonus leg',6:'Six-legger',7:'Centipede',noodle:'Noodle',tiny:'Pocket horse'},
+  tags:['Photo finish','Cruised it','By a nose'],
+  win:['Champion. The crowd is on its feet.','First across the line. Frame that sketch.','Winner by a long stride.'],
+  mid:['Respectable. The legs held up.','Close, but the rivals had better paperwork.','Podium dreams, mid-pack results.'],
+  last:['Last, but unforgettable.','The drawing was brave. The result was not.','Every stable needs a lovable underdog.'],
+  you:'You',
+  c:{off:'And they\'re off!',lead:function(n){return n+' takes the lead.'},burst:function(n){return n+' finds another gear!'},trip:function(n){return n+' trips over a loose thought.'},bird:function(n){return n+' is distracted by a bird.'},stretch:'Into the final stretch.',photo:'Too close to call. Photo finish.',done:'And that is the race.'}},
+ zh:{eyebrow:'比赛日 · 开放报名',h1:'画一匹马。<br>起个名字。<em>开赛！</em>',lede:'随便画一匹马。画得怎么样，决定它跑多快：腿长在该长的地方很加分。',
+  padhint:'用手指或鼠标画',undo:'撤销',clear:'清空',sLegs:'腿',sSpeed:'速度',sHeart:'耐力',sType:'类型',nameLabel:'给马起个名字',enter:'参加比赛',
+  sample:'画板上有一匹示范马。点清空，画你自己的。',faceR:'朝右 →',faceL:'← 朝左',soundOn:'声音开',soundOff:'声音关',
+  again:'再赛一次',redraw:'重画一匹',go:'冲！',gates:'进入起跑闸',empty:'请先画点什么',
+  record:function(w,r){return '马厩战绩：'+r+' 场 '+w+' 胜'},
+  types:{0:'谜之生物',1:'跳跳杆',2:'两足马',3:'三脚架',4:'标准马',5:'多一条腿',6:'六足马',7:'蜈蚣',noodle:'面条',tiny:'袖珍马'},
+  tags:['险胜','轻松夺冠','领先一个马鼻'],
+  win:['冠军！全场起立。','第一个冲线，这幅画值得裱起来。','遥遥领先。'],
+  mid:['成绩不错，腿没掉链子。','很接近了，对手经验更足。','梦想站上领奖台，现实排在中游。'],
+  last:['最后一名，但让人难忘。','画得很勇敢，成绩不太勇敢。','每个马厩都需要一匹可爱的垫底马。'],
+  you:'你',
+  c:{off:'比赛开始！',lead:function(n){return n+' 冲到了第一。'},burst:function(n){return n+' 突然加速！'},trip:function(n){return n+' 被自己的念头绊了一下。'},bird:function(n){return n+' 被一只小鸟分了心。'},stretch:'进入最后冲刺。',photo:'难分高下，照片定胜负。',done:'比赛结束。'}}
+};
+var lang='en';try{var sl=localStorage.getItem('dd-lang');if(sl)lang=sl}catch(e){}
+function T(){return I18N[lang]}
+var $=function(id){return document.getElementById(id)};
+function applyText(){
+  var t=T();
+  document.querySelectorAll('[data-t]').forEach(function(el){var v=t[el.getAttribute('data-t')];if(v==null)return;if(el.hasAttribute('data-html'))el.innerHTML=v;else el.textContent=v});
+  $('langBtn').textContent=lang==='en'?'中文':'EN';
+  $('soundBtn').textContent=sound?t.soundOn:t.soundOff;
+  $('faceBtn').textContent=facing>0?t.faceR:t.faceL;
+  document.documentElement.lang=lang==='en'?'en':'zh-CN';
+  scout();
+}
+
+/* ---------- sound ---------- */
+var sound=false,actx=null;
+function beep(f,d,type,vol){
+  if(!sound)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    var o=actx.createOscillator(),g=actx.createGain();
+    o.type=type||'square';o.frequency.value=f;g.gain.value=vol||0.05;
+    o.connect(g);g.connect(actx.destination);o.start();
+    g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+d);o.stop(actx.currentTime+d);
+  }catch(e){}
+}
+$('soundBtn').setAttribute('aria-pressed','false');
+$('soundBtn').addEventListener('click',function(){
+  sound=!sound;this.setAttribute('aria-pressed',String(sound));applyText();if(sound)beep(660,.12);
+});
+$('langBtn').addEventListener('click',function(){lang=lang==='en'?'zh':'en';try{localStorage.setItem('dd-lang',lang)}catch(e){}applyText();if(raceState)renderResultsText()});
+
+/* ---------- drawing pad ---------- */
+var COLORS=['#101B33','#DE343A','#1D6FF2','#8A3FC8'];
+var colorIdx=0,facing=1,strokes=[],cur=null;
+var pad=$('pad'),pctx=pad.getContext('2d');
+var PW=400,PH=300;
+function sizePad(){
+  var r=$('sheet').getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,3);
+  pad.width=Math.round(r.width*dpr);pad.height=Math.round(r.height*dpr);redrawPad();
+}
+function redrawPad(){
+  var w=pad.width,h=pad.height,s=w/PW;
+  pctx.setTransform(1,0,0,1,0,0);pctx.clearRect(0,0,w,h);
+  pctx.strokeStyle='#DCE5F1';pctx.lineWidth=Math.max(1,s*.8);
+  for(var x=0;x<=PW;x+=25){pctx.beginPath();pctx.moveTo(x*s,0);pctx.lineTo(x*s,h);pctx.stroke()}
+  for(var y=0;y<=PH;y+=25){pctx.beginPath();pctx.moveTo(0,y*s);pctx.lineTo(w,y*s);pctx.stroke()}
+  pctx.lineCap='round';pctx.lineJoin='round';pctx.lineWidth=5*s;
+  strokes.concat(cur?[cur]:[]).forEach(function(st){
+    pctx.strokeStyle=st.color;pctx.beginPath();
+    st.pts.forEach(function(p,i){i?pctx.lineTo(p[0]*s,p[1]*s):pctx.moveTo(p[0]*s,p[1]*s)});
+    if(st.pts.length===1)pctx.lineTo(st.pts[0][0]*s+.1,st.pts[0][1]*s);
+    pctx.stroke();
+  });
+}
+function ptr(e){var r=pad.getBoundingClientRect();return [(e.clientX-r.left)/r.width*PW,(e.clientY-r.top)/r.height*PH]}
+pad.addEventListener('pointerdown',function(e){
+  e.preventDefault();pad.setPointerCapture(e.pointerId);
+  cur={color:COLORS[colorIdx],pts:[ptr(e)]};redrawPad();
+});
+pad.addEventListener('pointermove',function(e){
+  if(!cur)return;var p=ptr(e),l=cur.pts[cur.pts.length-1];
+  if(Math.hypot(p[0]-l[0],p[1]-l[1])>1.5){cur.pts.push(p);redrawPad()}
+});
+function endStroke(){if(!cur)return;strokes.push(cur);cur=null;redrawPad();scout()}
+pad.addEventListener('pointerup',endStroke);pad.addEventListener('pointercancel',endStroke);
+$('undoBtn').addEventListener('click',function(){strokes.pop();redrawPad();scout()});
+$('clearBtn').addEventListener('click',function(){strokes=[];redrawPad();scout()});
+$('faceBtn').addEventListener('click',function(){facing=-facing;applyText()});
+COLORS.forEach(function(c,i){
+  var b=document.createElement('button');b.type='button';b.className='sw';b.style.background=c;
+  b.setAttribute('aria-label','Ink '+(i+1));b.setAttribute('aria-pressed',String(i===0));
+  b.addEventListener('click',function(){colorIdx=i;document.querySelectorAll('.sw').forEach(function(x,j){x.setAttribute('aria-pressed',String(j===i))})});
+  $('swatches').appendChild(b);
+});
+
+/* ---------- analysis ---------- */
+var off=document.createElement('canvas');off.width=PW;off.height=PH;var octx=off.getContext('2d',{willReadFrequently:true});
+function analyze(list){
+  var pts=[];list.forEach(function(s){s.pts.forEach(function(p){pts.push(p)})});
+  if(!pts.length)return null;
+  var x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  pts.forEach(function(p){x0=Math.min(x0,p[0]);x1=Math.max(x1,p[0]);y0=Math.min(y0,p[1]);y1=Math.max(y1,p[1])});
+  var w=Math.max(x1-x0,1),h=Math.max(y1-y0,1);
+  octx.clearRect(0,0,PW,PH);octx.lineCap='round';octx.lineJoin='round';octx.lineWidth=6;octx.strokeStyle='#000';
+  list.forEach(function(s){octx.beginPath();s.pts.forEach(function(p,i){i?octx.lineTo(p[0],p[1]):octx.moveTo(p[0],p[1])});if(s.pts.length===1)octx.lineTo(s.pts[0][0]+.1,s.pts[0][1]);octx.stroke()});
+  var bandH=Math.max(5,h*.12),by1=Math.min(PH-1,Math.ceil(y1)),by0=Math.max(0,Math.floor(by1-bandH)),bx0=Math.max(0,Math.floor(x0-3)),bx1=Math.min(PW-1,Math.ceil(x1+3));
+  var img=octx.getImageData(bx0,by0,bx1-bx0+1,by1-by0+1),cols=[];
+  for(var cx=0;cx<img.width;cx++){var on=false;for(var ry=0;ry<img.height;ry++){if(img.data[(ry*img.width+cx)*4+3]>40){on=true;break}}cols.push(on)}
+  var runs=0,gap=99;
+  for(var i=0;i<cols.length;i++){if(cols[i]){if(gap>=3)runs++;gap=0}else gap++}
+  var legs=Math.min(runs,9),aspect=w/h;
+  var LB=[0,-.08,-.04,.03,.10,.05,.01,-.03,-.05,-.06];
+  var sp=1+LB[Math.min(legs,9)]+(aspect>1.1&&aspect<2.6?.03:0)-(w<90?.05:0);
+  var heart=Math.max(.45,Math.min(.95,.5+Math.min(list.length,10)*.04));
+  var type=aspect>3.2?'noodle':(w<90&&h<70?'tiny':Math.min(legs,7));
+  return {legs:legs,speed:sp,heart:heart,type:type,aspect:aspect,w:w,h:h,x0:x0,y0:y0,x1:x1,y1:y1};
+}
+function scout(){
+  var a=analyze(strokes),t=T();
+  if(!a){$('vLegs').textContent='-';$('vSpeed').textContent='-';$('vHeart').textContent='-';$('vType').textContent=t.empty;return}
+  $('vLegs').textContent=a.legs;
+  $('vSpeed').textContent=Math.round(a.speed*100);
+  $('vHeart').textContent=Math.round(a.heart*100);
+  $('vType').textContent=t.types[a.type];
+}
+
+/* ---------- horses ---------- */
+function rivalHorse(k){
+  var P=[
+   [ [[10,28],[62,28],[62,44],[10,44],[10,28]],[[62,28],[74,10],[84,10]],[[74,10],[90,8],[94,18],[84,20]],[[14,44],[10,68]],[[28,44],[30,68]],[[46,44],[44,68]],[[58,44],[62,68]],[[10,30],[2,46]] ],
+   [ [[8,34],[66,34],[66,52],[8,52],[8,34]],[[66,34],[78,20],[86,20]],[[78,20],[94,18],[98,28],[86,30]],[[14,52],[12,68]],[[30,52],[31,68]],[[46,52],[45,68]],[[60,52],[62,68]],[[8,36],[0,50]] ],
+   [ [[10,22],[52,22],[52,36],[10,36],[10,22]],[[52,22],[66,-10],[72,-10]],[[66,-10],[84,-14],[86,-6],[72,-4]],[[14,36],[10,70]],[[26,36],[28,70]],[[40,36],[38,70]],[[50,36],[54,70]],[[10,24],[2,38]] ]
+  ][k];
+  return P.map(function(p){return {pts:p,color:['#101B33','#DE343A','#8A3FC8'][k]}});
+}
+function toLocal(list,flip){
+  var a=analyze(list),maxW=74,maxH=46,s=Math.min(maxW/a.w,maxH/a.h,1.6);
+  var cx=(a.x0+a.x1)/2,by=a.y1;
+  return {H:a.h*s,parts:list.map(function(st){return {color:st.color,pts:st.pts.map(function(p){return [(p[0]-cx)*s*(flip?-1:1),(p[1]-by)*s]})}})};
+}
+
+/* ---------- race ---------- */
+var rc=$('race'),rctx=rc.getContext('2d'),RW=400,RH=330,LANE=66,TOP=30;
+var raceState=null,raf=0,lastDraw=null;
+var RIVALS=[{n:'Sir Gallops-a-Lot',s:1.035,k:0},{n:'Hay Fever',s:.99,k:1},{n:'Neigh Sayer',s:1.01,k:2}];
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function startRace(){
+  var a=analyze(strokes);if(!a){$('vType').textContent=T().empty;return}
+  var name=($('horseName').value||'Sir Scribble').trim().slice(0,22)||'Sir Scribble';
+  $('screenDraw').hidden=true;$('screenRace').hidden=false;$('results').hidden=true;$('ticker').innerHTML='';
+  var me=toLocal(strokes,facing<0);
+  var racers=[{name:name,me:true,s:a.speed,heart:a.heart,loc:me,chaos:.3+((a.w*7+a.h*3+strokes.length*11)%10)/30}];
+  RIVALS.forEach(function(r,i){var rv=r.s+(Math.random()-.5)*.05;racers.push({name:r.n,s:rv,heart:.6+Math.random()*.3,loc:toLocal(rivalHorse(r.k),false),chaos:.25+Math.random()*.2})});
+  // shuffle lanes (player keeps a random lane)
+  racers.sort(function(){return Math.random()-.5});
+  racers.forEach(function(r,i){
+    r.lane=i;r.p=0;r.time=null;r.ph=Math.random()*6;r.a=1.3+Math.random();r.b=2.4+Math.random()*1.5;r.ph2=Math.random()*6;r.ev=[];
+    var n=1+Math.floor(Math.random()*2);
+    for(var j=0;j<n;j++)r.ev.push({t:1.8+Math.random()*6,type:Math.random()<.55?'burst':(Math.random()<.5?'trip':'bird'),used:false,until:0});
+  });
+  raceState={racers:racers,t:-3.4,phase:'count',leader:null,stretch:false,finished:0,parts:[],said:{},last:performance.now(),order:null,photo:false};
+  say(null,'gates');beep(440,.1);
+  cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);window.scrollTo(0,0);
+}
+function say(txt,key){
+  var t=T(),line=txt;if(key==='gates')line=t.gates;
+  $('ticker').innerHTML='<b>'+(lang==='en'?'Live':'直播')+'</b><span></span>';$('ticker').lastChild.textContent=line;
+}
+var DIST=(RW-59)-58,STARTX=58,FINX=RW-24;
+function loop(now){
+  var S=raceState;if(!S)return;
+  var dt=Math.min(.05,(now-S.last)/1000);S.last=now;S.t+=dt;
+  if(S.phase==='count'){
+    var n=Math.ceil(-S.t);
+    if(S.t>=0){S.phase='run';say(T().c.off);beep(880,.35,'square',.07)}
+    else if(S.cd!==n){S.cd=n;beep(520,.12)}
+  }
+  if(S.phase==='run'){
+    var T0=S.t;
+    S.racers.forEach(function(r){
+      if(r.time!==null)return;
+      var f=1+r.chaos*.35*Math.sin(T0*r.a+r.ph)+.1*Math.sin(T0*r.b+r.ph2);
+      var late=Math.max(0,(r.p-.55)/.45);f*=1-(1-r.heart)*.55*late;
+      r.ev.forEach(function(e){
+        if(!e.used&&T0>e.t){e.used=true;e.until=T0+.9;var c=T().c;
+          say(e.type==='burst'?c.burst(r.name):e.type==='trip'?c.trip(r.name):c.bird(r.name));
+          if(e.type==='burst')beep(990,.15,'triangle',.05)}
+        if(T0<e.until)f*=e.type==='burst'?1.45:.25;
+      });
+      r.p+=dt*(1/9.2)*r.s*f;r.ph+=dt*0;
+      r.cadence=(r.cadence||0)+dt*(9+14*f);
+      if(r.p>=1){r.p=1;r.time=T0;S.finished++;S.parts=S.parts.concat([]);if(S.finished===1)beep(784,.4,'triangle',.07)}
+    });
+    var lead=S.racers.reduce(function(a,b){return b.p>a.p?b:a});
+    if(S.leader!==lead&&lead.p>.08&&lead.p<.9){if(S.leader)say(T().c.lead(lead.name));S.leader=lead}else if(!S.leader&&lead.p>.08)S.leader=lead;
+    if(!S.stretch&&lead.p>.82){S.stretch=true;say(T().c.stretch)}
+    if(S.finished===S.racers.length){
+      S.phase='done';S.order=S.racers.slice().sort(function(a,b){return a.time-b.time});
+      S.photo=S.order[1].time-S.order[0].time<.22;
+      say(S.photo?T().c.photo:T().c.done);
+      if(S.order[0].me)confetti();
+      showResults();
+    }
+  }
+  drawRace(now);
+  if(S.phase!=='done'||S.parts.length)raf=requestAnimationFrame(loop);
+}
+function confetti(){
+  var S=raceState,cols=['#F2B300','#DE343A','#1D6FF2','#FFFFFF','#8A3FC8'];
+  for(var i=0;i<70;i++)S.parts.push({x:RW/2+(Math.random()-.5)*120,y:RH*.55,vx:(Math.random()-.5)*220,vy:-120-Math.random()*200,c:cols[i%5],r:Math.random()*6,life:2.2+Math.random()});
+}
+function drawRace(now){
+  var S=raceState,w=rc.width,h=rc.height,dpr=Math.min(window.devicePixelRatio||1,3);
+  var rect=rc.getBoundingClientRect();
+  if(Math.abs(rc.width-rect.width*dpr)>2){rc.width=Math.round(rect.width*dpr);rc.height=Math.round(rect.width*dpr*RH/RW);w=rc.width;h=rc.height}
+  var s=w/RW,c=rctx;c.setTransform(s,0,0,s,0,0);
+  var turf=css('--turf'),turf2=css('--turf2'),ink='#101B33',paper='#F7FAFD';
+  c.fillStyle=turf;c.fillRect(0,0,RW,RH);
+  // grandstand strip
+  c.fillStyle=css('--surface');c.globalAlpha=.18;c.fillRect(0,0,RW,TOP-6);c.globalAlpha=1;
+  c.fillStyle='rgba(255,255,255,.7)';
+  for(var i=0;i<40;i++){c.fillRect(6+i*10+(i%3),6+(i*7)%9,3,3)}
+  for(var L=0;L<4;L++){
+    c.fillStyle=L%2?turf2:turf;c.fillRect(0,TOP+L*LANE,RW,LANE);
+    c.fillStyle='rgba(255,255,255,.55)';c.fillRect(0,TOP+L*LANE,RW,1.2);
+  }
+  c.fillRect(0,TOP+4*LANE,RW,1.2);
+  // start gate
+  c.fillStyle='rgba(255,255,255,.7)';c.fillRect(24,TOP,2,4*LANE);
+  // finish checker
+  for(var r=0;r<4*LANE/8;r++){for(var q=0;q<3;q++){c.fillStyle=(r+q)%2?'#101B33':'#FFFFFF';c.fillRect(FINX+q*6-6,TOP+r*8,6,8)}}
+  // lane bibs + names
+  c.font='500 9px "DM Mono",monospace';c.textBaseline='top';
+  S.racers.forEach(function(rc2){
+    var y=TOP+rc2.lane*LANE;
+    c.fillStyle='rgba(16,27,51,.85)';c.beginPath();c.arc(12,y+11,7.5,0,6.283);c.fill();
+    c.fillStyle='#fff';c.textAlign='center';c.font='500 9px "DM Mono",monospace';c.fillText(String(rc2.lane+1),12,y+7);
+    c.textAlign='left';c.fillStyle='rgba(255,255,255,.92)';c.font='500 9px "DM Mono",monospace';
+    c.fillText((rc2.me?T().you+' · ':'')+rc2.name.toUpperCase(),24,y+4);
+  });
+  // horses
+  S.racers.forEach(function(rc2){
+    var gy=TOP+rc2.lane*LANE+LANE-8,x=STARTX+rc2.p*DIST;
+    var run=S.phase==='run'&&rc2.time===null,cad=rc2.cadence||0;
+    var amp=run?5.5:0,H=Math.max(rc2.loc.H,10);
+    var bob=run?-Math.abs(Math.sin(cad*.5))*3.2:0;
+    // shadow
+    c.fillStyle='rgba(0,0,0,.18)';c.beginPath();c.ellipse(x,gy+1,22,3,0,0,6.283);c.fill();
+    for(var pass=0;pass<2;pass++){
+      c.lineCap='round';c.lineJoin='round';
+      c.lineWidth=pass?2.4:5.2;
+      rc2.loc.parts.forEach(function(part){
+        c.strokeStyle=pass?part.color:paper;c.beginPath();
+        part.pts.forEach(function(p,i){
+          var yf=Math.max(0,Math.min(1,-p[1]/H)),sw=0;
+          if(yf<.42)sw=Math.sin(cad*.5*2+p[0]*.05)*amp*(.42-yf)/.42;
+          var px=x+p[0]+sw,py=gy+p[1]+bob;
+          i?c.lineTo(px,py):c.moveTo(px,py);
+        });
+        if(part.pts.length===1)c.lineTo(x+part.pts[0][0]+.1,gy+part.pts[0][1]+bob);
+        c.stroke();
+      });
+    }
+  });
+  // countdown
+  if(S.phase==='count'){
+    var n=Math.ceil(-S.t);
+    c.fillStyle='rgba(16,27,51,.45)';c.fillRect(0,0,RW,RH);
+    c.fillStyle='#fff';c.textAlign='center';c.textBaseline='middle';c.font='800 96px "Bricolage Grotesque",sans-serif';
+    c.fillText(String(n),RW/2,RH/2);c.textBaseline='top';
+  }
+  if(S.phase==='run'&&S.t<.6){
+    c.fillStyle='#fff';c.textAlign='center';c.textBaseline='middle';c.font='800 64px "Bricolage Grotesque",sans-serif';
+    c.globalAlpha=1-S.t/.6;c.fillText(T().go,RW/2,RH/2);c.globalAlpha=1;c.textBaseline='top';
+  }
+  // confetti
+  var dts=1/60;
+  S.parts=S.parts.filter(function(p){p.life-=dts;p.x+=p.vx*dts;p.y+=p.vy*dts;p.vy+=380*dts;return p.life>0&&p.y<RH+10});
+  S.parts.forEach(function(p){c.fillStyle=p.c;c.fillRect(p.x,p.y,5,3+p.r/2)});
+}
+function showResults(){
+  var S=raceState,rec={r:0,w:0};
+  try{rec=JSON.parse(localStorage.getItem('dd-record'))||rec}catch(e){}
+  rec.r++;if(S.order[0].me)rec.w++;
+  try{localStorage.setItem('dd-record',JSON.stringify(rec))}catch(e){}
+  S.rec=rec;S.rank=S.order.indexOf(S.racers.filter(function(r){return r.me})[0]);
+  $('results').hidden=false;renderResultsText();
+  setTimeout(function(){$('results').scrollIntoView({behavior:'smooth',block:'nearest'})},400);
+}
+function renderResultsText(){
+  var S=raceState;if(!S||!S.order)return;var t=T(),q=S.rank,pool=q===0?t.win:(q===3?t.last:t.mid);
+  $('verdict').textContent=pool[(Math.floor(S.order[0].time*10)+q)%pool.length];
+  var ol=$('rank');ol.innerHTML='';
+  S.order.forEach(function(r,i){
+    var li=document.createElement('li');li.className=(i===0?'first ':'')+(r.me?'me':'');
+    var b=document.createElement('span');b.className='bib';b.textContent=i+1;
+    var n=document.createElement('span');n.className='nm';n.textContent=r.name;
+    var sm=document.createElement('small');sm.textContent=(r.me?t.you+' · ':'')+(lang==='en'?'Lane ':'赛道 ')+(r.lane+1);n.appendChild(sm);
+    var tm=document.createElement('span');tm.className='tm';tm.textContent=r.time.toFixed(2)+' s';
+    li.appendChild(b);li.appendChild(n);li.appendChild(tm);ol.appendChild(li);
+  });
+  $('record').textContent=t.record(S.rec.w,S.rec.r);
+}
+$('entry').addEventListener('submit',function(e){e.preventDefault();startRace()});
+$('againBtn').addEventListener('click',startRace);
+$('redrawBtn').addEventListener('click',function(){
+  cancelAnimationFrame(raf);raceState=null;$('screenRace').hidden=true;$('screenDraw').hidden=false;window.scrollTo(0,0);sizePad();
+});
+
+/* ---------- sample horse + boot ---------- */
+(function seed(){
+  var raw=rivalHorse(0),sc=2.4,ox=95,oy=60;
+  strokes=raw.map(function(p){return {color:'#101B33',pts:p.pts.map(function(q){return [q[0]*sc*0.9+ox+ (Math.random()-.5)*2,q[1]*sc*0.9+oy+(Math.random()-.5)*2]})}});
+})();
+window.addEventListener('resize',function(){if(!$('screenDraw').hidden)sizePad()});
+applyText();sizePad();
+if(window.claude&&window.claude.hot&&window.claude.hot.snapshot){}
+})();
+</script>
+
+</html>
