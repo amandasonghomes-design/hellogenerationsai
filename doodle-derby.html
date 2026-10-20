@@ -79,7 +79,7 @@ html[data-theme="light"][data-embed] body{padding-block:0 8px}
   <header>
     <div class="brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 20V10a6 6 0 0 1 12 0v10"/><path d="M6 15h3M15 15h3"/></svg>
-      Doodle Derby
+      Doodle Derby <small id="ver" style="font-weight:500;font-size:11px;opacity:.6;margin-left:4px">v7</small>
     </div>
     <div class="tools">
       <button class="chip" id="langBtn" type="button" aria-label="Language">中文</button>
@@ -237,7 +237,7 @@ function loadHoof(){
   if(hoofBuf||hoofLoading||!actx)return;hoofLoading=true;
   try{
     var bin=atob(HOOF_B64),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
-    actx.decodeAudioData(u.buffer,function(b){hoofBuf=b},function(){hoofLoading=false});
+    actx.decodeAudioData(u.buffer,function(b){hoofBuf=b;var v=document.getElementById('ver');if(v)v.textContent='v7 · gallop ✓'},function(){hoofLoading=false});
   }catch(e){hoofLoading=false}
 }
 function stopGallop(S){if(S&&S.hg){var tt=actx.currentTime;try{S.hg.gain.setTargetAtTime(0,tt,.25);S.hg._src.stop(tt+1.4)}catch(e){}S.hg=null}if(S)S.hdone=true}
@@ -278,7 +278,7 @@ function cheer(){
 }
 $('soundBtn').setAttribute('aria-pressed','false');
 $('soundBtn').addEventListener('click',function(){
-  sound=!sound;this.setAttribute('aria-pressed',String(sound));applyText();if(sound)beep(660,.12);
+  sound=!sound;this.setAttribute('aria-pressed',String(sound));applyText();if(sound){beep(660,.12);loadHoof()}
 });
 $('langBtn').addEventListener('click',function(){lang=lang==='en'?'zh':'en';try{localStorage.setItem('dd-lang',lang)}catch(e){}applyText();if(raceState)renderResultsText()});
 
