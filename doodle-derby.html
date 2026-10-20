@@ -140,7 +140,7 @@ html[data-theme="light"][data-embed] body{padding-block:0 8px}
 var I18N={
  en:{eyebrow:'Race day · entries open',h1:'Draw it.<br>Name it. <em>Race it.</em>',lede:'Sketch any horse you like. Your drawing sets the speed: legs where legs belong help a lot.',
   padhint:'Draw with finger or mouse',undo:'Undo',clear:'Clear',sLegs:'Legs',sSpeed:'Speed',sHeart:'Heart',sType:'Class',nameLabel:'Name your horse',enter:'Enter the race',
-  sample:'A sample horse is on the pad. Clear it to draw your own.',faceR:'Faces right →',faceL:'← Faces left',soundOn:'Sound on',soundOff:'Sound off',
+  sample:'A sample horse is on the pad. Clear it to draw your own. Turn Sound on to hear the starting bugle.',faceR:'Faces right →',faceL:'← Faces left',soundOn:'Sound on',soundOff:'Sound off',
   again:'Race again',redraw:'Draw a new horse',go:'GO!',gates:'Into the gates',empty:'Draw something first',
   record:function(w,r){return 'Stable record: '+w+' win'+(w==1?'':'s')+' from '+r+' race'+(r==1?'':'s')},
   types:{0:'Mystery',1:'Pogo stick',2:'Biped',3:'Tripod',4:'Textbook horse',5:'Bonus leg',6:'Six-legger',7:'Centipede',noodle:'Noodle',tiny:'Pocket horse'},
@@ -152,7 +152,7 @@ var I18N={
   c:{off:'And they\'re off!',lead:function(n){return n+' takes the lead.'},burst:function(n){return n+' finds another gear!'},trip:function(n){return n+' trips over a loose thought.'},bird:function(n){return n+' is distracted by a bird.'},stretch:'Into the final stretch.',photo:'Too close to call. Photo finish.',done:'And that is the race.'}},
  zh:{eyebrow:'比赛日 · 开放报名',h1:'画一匹马。<br>起个名字。<em>开赛！</em>',lede:'随便画一匹马。画得怎么样，决定它跑多快：腿长在该长的地方很加分。',
   padhint:'用手指或鼠标画',undo:'撤销',clear:'清空',sLegs:'腿',sSpeed:'速度',sHeart:'耐力',sType:'类型',nameLabel:'给马起个名字',enter:'参加比赛',
-  sample:'画板上有一匹示范马。点清空，画你自己的。',faceR:'朝右 →',faceL:'← 朝左',soundOn:'声音开',soundOff:'声音关',
+  sample:'画板上有一匹示范马。点清空，画你自己的。打开声音，可以听到起跑号角。',faceR:'朝右 →',faceL:'← 朝左',soundOn:'声音开',soundOff:'声音关',
   again:'再赛一次',redraw:'重画一匹',go:'冲！',gates:'进入起跑闸',empty:'请先画点什么',
   record:function(w,r){return '马厩战绩：'+r+' 场 '+w+' 胜'},
   types:{0:'谜之生物',1:'跳跳杆',2:'两足马',3:'三脚架',4:'标准马',5:'多一条腿',6:'六足马',7:'蜈蚣',noodle:'面条',tiny:'袖珍马'},
@@ -188,6 +188,28 @@ function beep(f,d,type,vol){
     g.gain.exponentialRampToValueAtTime(0.0001,actx.currentTime+d);o.stop(actx.currentTime+d);
   }catch(e){}
 }
+
+/* bugle fanfare in the spirit of the traditional "Call to the Post": brassy saw + low-pass, bugle-series notes only */
+var NF={G4:392,C5:523.25,E5:659.25,G5:783.99,C6:1046.5};
+function horn(freq,t,d,vol){
+  var o1=actx.createOscillator(),o2=actx.createOscillator(),f=actx.createBiquadFilter(),g=actx.createGain();
+  o1.type='sawtooth';o2.type='sawtooth';o1.frequency.value=freq;o2.frequency.value=freq*1.004;
+  f.type='lowpass';f.frequency.setValueAtTime(900,t);f.frequency.linearRampToValueAtTime(2600,t+.05);f.Q.value=1.2;
+  g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(vol,t+.03);g.gain.setValueAtTime(vol*.8,t+Math.max(.04,d-.06));g.gain.linearRampToValueAtTime(0.0001,t+d);
+  o1.connect(f);o2.connect(f);f.connect(g);g.connect(actx.destination);
+  o1.start(t);o2.start(t);o1.stop(t+d+.02);o2.stop(t+d+.02);
+}
+function playTune(seq){
+  if(!sound)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended')actx.resume();
+    var t=actx.currentTime+.05;
+    seq.forEach(function(n){if(n[0])horn(NF[n[0]],t,n[1]*.92,.07);t+=n[1]});
+  }catch(e){}
+}
+function startFanfare(){playTune([['G4',.17],['G4',.17],['G4',.17],['C5',.17],['E5',.17],['G5',.5],[0,.08],['G5',.17],['E5',.17],['C5',.17],['E5',.17],['G5',.5],[0,.08],['C5',.12],['E5',.12],['G5',.12],['C6',.3]])}
+function winFanfare(){playTune([['C5',.14],['E5',.14],['G5',.14],['C6',.6]])}
 $('soundBtn').setAttribute('aria-pressed','false');
 $('soundBtn').addEventListener('click',function(){
   sound=!sound;this.setAttribute('aria-pressed',String(sound));applyText();if(sound)beep(660,.12);
@@ -304,7 +326,7 @@ function startRace(){
     for(var j=0;j<n;j++)r.ev.push({t:1.8+Math.random()*6,type:Math.random()<.55?'burst':(Math.random()<.5?'trip':'bird'),used:false,until:0});
   });
   raceState={racers:racers,t:-3.4,phase:'count',leader:null,stretch:false,finished:0,parts:[],said:{},last:performance.now(),order:null,photo:false};
-  say(null,'gates');beep(440,.1);
+  say(null,'gates');startFanfare();
   cancelAnimationFrame(raf);raf=requestAnimationFrame(loop);window.scrollTo(0,0);
 }
 function say(txt,key){
@@ -318,7 +340,7 @@ function loop(now){
   if(S.phase==='count'){
     var n=Math.ceil(-S.t);
     if(S.t>=0){S.phase='run';say(T().c.off);beep(880,.35,'square',.07)}
-    else if(S.cd!==n){S.cd=n;beep(520,.12)}
+    else if(S.cd!==n){S.cd=n}
   }
   if(S.phase==='run'){
     var T0=S.t;
@@ -334,7 +356,7 @@ function loop(now){
       });
       r.p+=dt*(1/9.2)*r.s*f;r.ph+=dt*0;
       r.cadence=(r.cadence||0)+dt*(9+14*f);
-      if(r.p>=1){r.p=1;r.time=T0;S.finished++;S.parts=S.parts.concat([]);if(S.finished===1)beep(784,.4,'triangle',.07)}
+      if(r.p>=1){r.p=1;r.time=T0;S.finished++;S.parts=S.parts.concat([]);if(S.finished===1&&!S.racers.filter(function(x){return x.me&&x.time!==null})[0])beep(784,.4,'triangle',.07)}
     });
     var lead=S.racers.reduce(function(a,b){return b.p>a.p?b:a});
     if(S.leader!==lead&&lead.p>.08&&lead.p<.9){if(S.leader)say(T().c.lead(lead.name));S.leader=lead}else if(!S.leader&&lead.p>.08)S.leader=lead;
@@ -343,7 +365,7 @@ function loop(now){
       S.phase='done';S.order=S.racers.slice().sort(function(a,b){return a.time-b.time});
       S.photo=S.order[1].time-S.order[0].time<.22;
       say(S.photo?T().c.photo:T().c.done);
-      if(S.order[0].me)confetti();
+      if(S.order[0].me){confetti();winFanfare()}
       showResults();
     }
   }
