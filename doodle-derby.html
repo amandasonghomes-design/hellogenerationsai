@@ -363,7 +363,7 @@ function loop(now){
   }
   if(S.phase==='run'){
     var T0=S.t;
-    if(S.finished<S.racers.length){S.hoof=(S.hoof||0)-dt;while(S.hoof<=0){S.hoof+=.115;S.hi=(S.hi||0)+1;hoofBeat(S.hi)}}
+    if(S.finished<S.racers.length){S.hoof=(S.hoof||0)-dt;while(S.hoof<=0){S.hoof+=.13;S.hi=(S.hi==null?0:S.hi+1);if(S.hi%16<8)hoofBeat(S.hi)}}
     S.racers.forEach(function(r){
       if(r.time!==null)return;
       var f=1+r.chaos*.35*Math.sin(T0*r.a+r.ph)+.1*Math.sin(T0*r.b+r.ph2);
