@@ -210,6 +210,25 @@ function playTune(seq){
 }
 function startFanfare(){playTune([['G4',.17],['G4',.17],['G4',.17],['C5',.17],['E5',.17],['G5',.5],[0,.08],['G5',.17],['E5',.17],['C5',.17],['E5',.17],['G5',.5],[0,.08],['C5',.12],['E5',.12],['G5',.12],['C6',.3]])}
 function winFanfare(){playTune([['C5',.14],['E5',.14],['G5',.14],['C6',.6]])}
+
+/* hoofbeats: a noise "clack" through a band-pass plus a short low thump, accented in groups of four */
+var nbuf=null;
+function hoofBeat(i){
+  if(!sound)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended')actx.resume();
+    if(!nbuf){nbuf=actx.createBuffer(1,actx.sampleRate*.08,actx.sampleRate);var d=nbuf.getChannelData(0);for(var k=0;k<d.length;k++)d[k]=(Math.random()*2-1)*Math.pow(1-k/d.length,3)}
+    var t=actx.currentTime,acc=[1,.55,.8,.55][i%4]*(.9+Math.random()*.2);
+    var s=actx.createBufferSource(),bp=actx.createBiquadFilter(),g=actx.createGain();
+    s.buffer=nbuf;bp.type='bandpass';bp.frequency.value=1300+Math.random()*250;bp.Q.value=1.4;g.gain.value=.5*acc;
+    s.connect(bp);bp.connect(g);g.connect(actx.destination);s.start(t);
+    var o=actx.createOscillator(),g2=actx.createGain();
+    o.type='sine';o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(60,t+.06);
+    g2.gain.setValueAtTime(.16*acc,t);g2.gain.exponentialRampToValueAtTime(.0001,t+.07);
+    o.connect(g2);g2.connect(actx.destination);o.start(t);o.stop(t+.08);
+  }catch(e){}
+}
 $('soundBtn').setAttribute('aria-pressed','false');
 $('soundBtn').addEventListener('click',function(){
   sound=!sound;this.setAttribute('aria-pressed',String(sound));applyText();if(sound)beep(660,.12);
@@ -344,6 +363,7 @@ function loop(now){
   }
   if(S.phase==='run'){
     var T0=S.t;
+    if(S.finished<S.racers.length){S.hoof=(S.hoof||0)-dt;while(S.hoof<=0){S.hoof+=.115;S.hi=(S.hi||0)+1;hoofBeat(S.hi)}}
     S.racers.forEach(function(r){
       if(r.time!==null)return;
       var f=1+r.chaos*.35*Math.sin(T0*r.a+r.ph)+.1*Math.sin(T0*r.b+r.ph2);
