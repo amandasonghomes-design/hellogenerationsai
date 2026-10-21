@@ -60,7 +60,7 @@
         : vid
         ? '<video controls preload="metadata" playsinline' + (img ? ' poster="' + esc(img) + '"' : '') + ' src="' + esc(vid) + '"></video>'
         : (img ? '<img src="' + esc(img) + '" alt="' + esc(w.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '');
-      var thumb = '<div class="thumb ' + cat + '"><span aria-hidden="true">' + icons[cat] + '</span>' + visual +
+      var thumb = '<div class="thumb ' + cat + (w.portrait ? ' portrait' : '') + '"><span aria-hidden="true">' + icons[cat] + '</span>' + visual +
         '<span class="tag">' + (w.sample ? '示例 · ' : '') + labels[cat] + '</span></div>';
       var media = '';
       if (safeUrl(w.audio)) media += '<audio controls preload="none" src="' + esc(safeUrl(w.audio)) + '"></audio>';
