@@ -76,6 +76,15 @@
              hit1: h1 / n, hit3: h3 / n, hit5: h5 / n, mrr: rr / n, ndcg: nd / n, cats: cats, misses: misses };
   }
 
-  var api = { buildChunks: buildChunks, evaluate: evaluate };
+  // ---- search: top-k chunks with cosine scores (used by the site's AI helper) ----
+  function makeSearcher(data, size, overlapPct) {
+    var chunks = buildChunks(data.docs, size, Math.round(size * overlapPct / 100)), idx = new Index(chunks);
+    return function (q, k) {
+      var qv = idx.vec(counts(q)), sc = idx.vecs.map(function (dv) { var s = 0; for (var g in qv) { if (dv[g]) s += qv[g] * dv[g]; } return s; });
+      return sc.map(function (s, i) { return i; }).sort(function (a, b) { return sc[b] - sc[a] || a - b; }).slice(0, k || 3).map(function (i) { return { chunk: chunks[i], score: sc[i] }; });
+    };
+  }
+
+  var api = { buildChunks: buildChunks, evaluate: evaluate, makeSearcher: makeSearcher };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.LabEngine = api;
 })(typeof window !== 'undefined' ? window : this);
