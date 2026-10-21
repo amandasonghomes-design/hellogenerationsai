@@ -1,13 +1,13 @@
 .hp-btn{position:fixed;right:16px;bottom:16px;z-index:60;width:68px;height:68px;border-radius:50%;border:2px solid #fff;background:#fff;box-shadow:0 8px 24px rgba(63,130,217,.35);cursor:pointer;padding:0;display:grid;place-items:center;transition:transform .15s}
 .hp-btn:hover{transform:translateY(-2px) scale(1.04)}
-.hp-btn svg{width:56px;height:56px}
+.hp-btn img{width:58px;height:58px;object-fit:contain}
 .hp-tip{position:fixed;right:92px;bottom:30px;z-index:60;background:#fff;color:#27345E;font:700 14px var(--font,system-ui);padding:8px 14px;border-radius:14px 14px 4px 14px;box-shadow:0 6px 18px rgba(63,130,217,.25);border:1px solid rgba(120,160,230,.3);max-width:200px}
 .hp-tip[hidden]{display:none}
 .hp-panel{position:fixed;right:16px;bottom:96px;z-index:61;width:min(380px,calc(100vw - 24px));height:min(560px,calc(100vh - 120px));display:flex;flex-direction:column;background:#F6FAFF;border:1px solid rgba(120,160,230,.35);border-radius:20px;box-shadow:0 18px 50px rgba(63,90,170,.30);overflow:hidden;font-family:var(--font,system-ui);color:#27345E}
 .hp-panel[hidden]{display:none}
 .hp-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:linear-gradient(135deg,#3F82D9,#7F6FE0);color:#fff}
-.hp-head .av{width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
-.hp-head .av svg{width:32px;height:32px}
+.hp-head .av{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.hp-head .av img{width:34px;height:34px;object-fit:contain}
 .hp-head b{font-size:16px;display:block;line-height:1.2}
 .hp-head small{opacity:.85;font-size:12px}
 .hp-x{margin-left:auto;background:rgba(255,255,255,.2);border:0;color:#fff;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;line-height:1}
