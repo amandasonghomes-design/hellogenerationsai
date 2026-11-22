@@ -139,7 +139,8 @@ function createWatch(wasmBytes, FONT, hooks) {
     },
     js_mktime: (p) => { const i = new Int32Array(mem.buffer, p, 6);
       return Math.floor(new Date(i[5] + 1900, i[4], i[3], i[2], i[1], i[0]).getTime() / 1000); },
-    js_pref_get: (k, d) => { try { const v = localStorage.getItem(prefKey(cstr(k))); return v == null ? d : (+v >>> 0); } catch (e) { return d; } },
+    js_pref_get: (k, d) => { try { if (cstr(k) === 'bright') return d;   // web: always start bright
+      const v = localStorage.getItem(prefKey(cstr(k))); return v == null ? d : (+v >>> 0); } catch (e) { return d; } },
     js_pref_put: (k, v) => { try { localStorage.setItem(prefKey(cstr(k)), String(v >>> 0)); } catch (e) {} },
     js_backlight: (v) => hooks.backlight && hooks.backlight(v),
     js_touch: (p) => { if (!touch.down) return 0; const o = new Int32Array(mem.buffer, p, 2); o[0] = touch.x; o[1] = touch.y; return 1; },
@@ -194,7 +195,7 @@ async function gunzip(b64) {
   let W;
   try {
     W = createWatch(await gunzip(WASM_GZ), FONT, {
-      backlight: v => { cv.style.filter = 'brightness(' + (0.25 + 0.75 * Math.min(255, v) / 255).toFixed(2) + ')'; }
+      backlight: v => { cv.style.filter = 'brightness(' + (0.6 + 0.4 * Math.min(255, v) / 255).toFixed(2) + ')'; }   // never too dark on the web
     });
     W.setup();
   } catch (e) { const el = document.getElementById('werr'); el.hidden = false; el.textContent = 'This browser could not start the watch.'; console.error(e); return; }
