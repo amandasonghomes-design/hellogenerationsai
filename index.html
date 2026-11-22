@@ -26,26 +26,20 @@
   </div>
 </div></div>
 
-<section class="feature" id="feature" hidden><div class="wrap"><div class="box">
-  <div>
-    <span class="pill pink" id="fWeek">本周精选</span>
-    <h2 id="fTitle"></h2>
-    <p id="fBlurb"></p>
-    <div class="tags" id="fTags"></div>
-    <div class="acts"><a class="btn solid" id="fOpen" href="#" target="_blank" rel="noopener">打开完整网站 ↗</a></div>
-  </div>
-  <div class="phone" id="fPhone"></div>
-</div></div></section>
+<div id="features"></div>
 <script src="/data/feature.js"></script>
-<script>(function(){var F=window.FEATURE,s=document.getElementById('feature');if(!F||!F.url||!s)return;
-function t(id,v){document.getElementById(id).textContent=v}
-t('fWeek',F.week||'本周精选');t('fTitle',F.title);t('fBlurb',F.blurb);
-document.getElementById('fTags').innerHTML=(F.tags||[]).map(function(x){var e=document.createElement('span');e.textContent=x;return e.outerHTML}).join('');
-document.getElementById('fOpen').href=F.url;
-var p=document.getElementById('fPhone'),b=document.createElement('button');b.type='button';b.className='poster';b.setAttribute('aria-label','在这里试玩');
-b.innerHTML='<img alt="" src="'+(F.poster||'')+'"><span class="go">▶ 在这里试一试</span><small>点一下才会加载，不会拖慢首页</small>';
-b.onclick=function(){var f=document.createElement('iframe');f.src=F.url;f.title=F.title;f.loading='lazy';f.height=F.height||600;f.setAttribute('allow','microphone; autoplay; clipboard-write');f.setAttribute('referrerpolicy','no-referrer');p.innerHTML='';p.appendChild(f);};
-p.appendChild(b);s.hidden=false;})();</script>
+<script>(function(){var L=window.FEATURES,root=document.getElementById('features');if(!L||!root)return;
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+L.forEach(function(F,i){if(!F||!F.url)return;
+var s=el('section','feature'),w=el('div','wrap'),box=el('div','box'),left=el('div'),ph=el('div','phone');
+left.appendChild(el('span','pill '+(i?'sky':'pink'),F.week||'精选'));left.appendChild(el('h2',null,F.title));left.appendChild(el('p',null,F.blurb));
+var tg=el('div','tags');(F.tags||[]).forEach(function(x){tg.appendChild(el('span',null,x))});left.appendChild(tg);
+var ac=el('div','acts'),a=el('a','btn solid',F.openText||'打开完整页面 →');a.href=F.open||F.url;if(!/^\//.test(a.getAttribute('href'))){a.target='_blank';a.rel='noopener'}ac.appendChild(a);left.appendChild(ac);
+var b=el('button','poster');b.type='button';b.setAttribute('aria-label','在这里试玩');
+var im=el('img');im.alt='';im.src=F.poster||'';b.appendChild(im);b.appendChild(el('span','go','▶ 在这里试一试'));b.appendChild(el('small',null,'点一下才会加载，不会拖慢首页'));
+b.onclick=function(){var f=document.createElement('iframe');f.src=F.url;f.title=F.title;f.loading='lazy';f.height=F.height||600;f.setAttribute('allow','microphone; autoplay; clipboard-write');if(/^https?:/.test(F.url))f.setAttribute('referrerpolicy','no-referrer');ph.innerHTML='';ph.appendChild(f)};
+ph.appendChild(b);box.appendChild(left);box.appendChild(ph);w.appendChild(box);s.appendChild(w);root.appendChild(s)});
+})();</script>
 
 <section class="home-courses"><div class="wrap">
   <div class="eyebrow">// ai courses</div>

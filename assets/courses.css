@@ -41,3 +41,6 @@
 .feature .poster .go{background:linear-gradient(135deg,#3F82D9,#7F6FE0);color:#fff;border-radius:999px;padding:10px 22px;font-size:16px}
 .feature .poster small{font-weight:600;color:var(--ink2);font-size:13px}
 @media (max-width:760px){.feature .box{grid-template-columns:1fr;padding:18px 14px;gap:16px}.feature h2{font-size:22px}}
+
+.feature+.feature{padding-top:0}
+.feature .pill.sky{background:#EAF2FF}
